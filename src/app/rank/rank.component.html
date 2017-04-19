@@ -1,0 +1,49 @@
+
+<h5>
+	The following journals have been marked as not having any rankings up to our standards. If you feel any of these are in error, you can edit them. When I make a button for it.
+
+</h5>
+	<ul *ngIf="unRanked.length">
+		<li  *ngFor = "let item of unRanked">
+			{{item[0].journalName}}
+		</li>
+
+	</ul>
+
+
+
+
+<h5> No Match for these. Try searching with different names. Otherwise, clink the button to confirm that this journal is not ranked high enough and we will disregard it in future searches. </h5>
+
+
+	<app-edit-journal [journals]="rankings.noMatch"  (addedRanks)="addRank($event)">
+	</app-edit-journal>
+
+
+
+
+<h5>
+	Once you've finished above, click "Show Ranks." (if you click this early, the links for the pdfs won't be complete. You can just toggle the reveal by clicking it twice, though.)
+</h5>
+<button (click)="showRanks()"> Show Ranks </button>
+
+<div *ngIf="showRankToggle">
+	<p>
+ 	we found ranks for the following journals:
+</p>
+
+	<div class="holder">
+		<app-display-ranking *ngFor="let item of rankings.rankedJournals let i = index" [results]="rankings.rankedJournals[i]" [journal]="item.journalName" ></app-display-ranking>
+	</div>
+
+<p>Visit each link and save the pdf, using numbers below to signal to package team. For now, this is the fastest route.</p>
+<ul>
+	<li *ngFor = "let item of gsRankLinks; let i = index">
+		<a href="{{item}}" target="_blank"> {{gsRankCats[i]}} </a> <p> suffix filename with {{gsRankNumbers[i]}}</p>
+	</li>
+	
+
+</ul>
+
+
+</div>

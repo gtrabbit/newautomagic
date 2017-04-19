@@ -1,0 +1,26 @@
+.struck{
+	text-decoration: line-through;
+}
+
+span{
+	font-size: 10pt;
+
+}
+
+.holder{
+	display: flex;
+	border-bottom: dotted silver 2px;
+	align-content: center;
+	justify-content: space-between;
+	
+}
+
+.buttons{
+	
+	display: flex;
+	flex-direction: column;
+}
+
+
+
+

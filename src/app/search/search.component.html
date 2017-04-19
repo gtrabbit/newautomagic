@@ -1,0 +1,10 @@
+<h2> Search Rankings </h2>
+<form>
+	<label for="searchInput">Journal Name</label>
+	<input type="text" name="searchInput" id="searchInput" #input>
+	<button type="submit" id="searchButton" (click)="search([input.value])" >Search</button>
+
+</form>
+
+<app-display-ranking *ngIf="searchHappened" [results]="results" [journal]="journal"> </app-display-ranking>
+

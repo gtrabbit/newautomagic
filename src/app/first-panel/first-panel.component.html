@@ -1,0 +1,93 @@
+<div [ngSwitch]="displayState">
+
+<div class="first" *ngSwitchCase="0">
+
+<h4> Shazzam! </h4>
+<p class="exp-text">Here's what the magical kitty found. This is EVERYTHING listed on the profile, which may include abstracts, theses, who knows. Compare this list with the client's CV and remove items as appropriate. Use the form below to add published/accepted papers that do not appear here. Click "next" when complete:</p>
+
+
+<label> Jump to Most Cited List?
+	<button (click)="gotoMC()">Jump!</button>
+</label>
+
+
+<hr>
+<h4>Add Paper: </h4>
+<app-add-paper [(paperList)]="paperList" [mode]="true"></app-add-paper>
+
+<hr>
+<p> {{paperList.length}} papers found: </p>
+<hr>
+	<div class="papers">
+
+		<app-paper *ngFor = "let item of paperList; let i = index" [(paper)]="paperList[i]" [index]="i">
+  	
+		</app-paper>
+
+	</div>
+	</div>
+	<div class="papers" *ngSwitchCase="1">
+	<p> including {{included.length}} papers </p>
+	<hr>
+
+			<h5>Search for these:</h5>
+		<ul class="journalList-holder">
+			<li *ngFor = "let item of journalList; let i = index" >
+				<span>{{item}}</span>
+				<div>
+				<button (click)="edit(i)" *ngIf="!editShow[i]" class="ut-btn">edit</button>
+				<button (click)="remove(i)" class="ut-btn" > remove </button>
+				</div>
+					<form *ngIf="editShow[i]">
+
+					<label for="edited"> Edit: </label>
+						<input ref-j type="text" name="edited" id="edited" [value]=journalList[i]>
+				<button type="button" (click)="submitEdit(i, j.value)"> Submit </button>						
+					</form>
+					
+			</li>
+
+		</ul>
+
+			<h5>Don't search for these:</h5>
+		<ul class="journalList-holder">
+			<li *ngFor = "let item of removed; let i = index">
+				{{item}}
+				<button (click)="returnItem(i)"> Return </button>
+			</li>
+
+		</ul>
+
+	</div>
+		
+	<div *ngSwitchCase="2">
+		<p *ngIf = "!toggleRankPanel"> awaiting response from server... <br>(if you arrived here directly from the top-cited list, you will need to go to the <u (click)="jumpBack()"> beginning </u> and specify which journals will be queried before rankings will be displayed) </p>
+		<div *ngIf="toggleRankPanel">
+			<app-rank [rankings]="rankings"></app-rank>
+		</div>
+	</div>
+
+	<div *ngSwitchCase="3">
+		<h5>Top-Cited Articles:</h5>
+		
+		<label for="fieldSelect"> Field:
+		<select id="fieldSelect" name="fieldSelect" #fsel>
+			<option *ngFor = "let fields of fieldList"> {{fields}} </option> 
+		</select>  
+		</label>
+
+		<label> Name: <input type="text" name="name" #Cname placeholder="Client's Name"> </label>
+		<button (click)="check(Cname.value)"> Check </button>
+
+
+		<p></p>
+		<app-top-cited [field]="fieldList[fsel.selectedIndex]" [pbf]="pbf" [paperList]="paperList" [name]="name"></app-top-cited>
+
+	</div>
+
+
+
+<hr>
+<button (click)="previous()" [disabled]="displayState<1">Previous</button>
+<button (click)="next()" [disabled]="displayState>2"> Next </button>
+<button (click)="close()">Finish</button>

@@ -1,0 +1,13 @@
+<div class="holder">
+	<span [ngClass]= "{'struck': paper.exclude}">
+  	"{{paper.title}}," <em>{{paper.journal}}</em>, {{paper.year}}. <strong> {{paper.citations}} citations </strong>
+	</span>
+	<div class="buttons">
+		<button class="btn-remove" (click)="remove()"> {{excludeMsg}} </button>
+		<button class="btn-edit" (click)="edit(!editing)" > edit </button>
+	</div>
+</div>
+
+<app-add-paper (edited)="edit($event)" *ngIf="editing" [mode]="false" [paper]="paper"></app-add-paper>
+
+

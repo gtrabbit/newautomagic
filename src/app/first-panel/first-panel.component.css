@@ -1,0 +1,72 @@
+p {
+	font-size: 12pt;
+}
+
+.exp-text{
+	font-size: 9pt;
+}
+
+app-paper{
+	margin: 5%;
+
+}
+
+button{
+	border-radius: 10px;
+	background-color: rgb(180,200,220);
+	border: double rgb(220, 200, 180) 2px;
+}
+
+button:hover{
+	background-color: rgb(220, 200, 180)
+}
+
+.journalList-holder li button{
+	background-color: rgb(220,220,220);
+	font-size: 8pt;
+}
+
+.journalList-holder{
+	display: block;
+	width: 500px;
+}
+
+.journalList-holder li{
+	display: flex;
+	justify-content: space-between;
+	border-bottom: dotted silver 1px;
+	flex-wrap: wrap;
+	max-width: 100%;
+
+}
+
+.journalList-holder li:hover{
+	background-color: rgb(240,240,250)
+}
+
+.journalList-holder li div{
+	align-self: self-end;
+}
+
+.journalList-holder li span{
+	flex-grow: 5;
+
+}
+
+.journalList-holder li form{
+	display: flex;
+	padding-left: 5%;
+	min-width: 400px;
+	justify-content: space-between;
+
+}
+
+.journalList-holder li form input{
+	flex-grow: 5;
+	width: 80%;
+}
+
+.journalList-holder li form button{
+	flex-grow: 1;
+}
+

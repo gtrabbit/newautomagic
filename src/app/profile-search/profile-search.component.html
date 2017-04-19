@@ -1,0 +1,16 @@
+<h2>Scan Profile</h2>
+
+<form id="form2">
+	<label for="profileInput" >GS Profile:</label>
+	<input type="text" name="profile" #profileInput required> <br>
+	
+	
+<br>
+	<button (click)="scan(profileInput.value)" id="magicButton">Magic</button>
+
+</form>
+
+<div class="panelHolder"  *ngIf="toggle">
+	<app-first-panel [data]="data" (closing)="toggleShow($event)"></app-first-panel>
+
+</div>

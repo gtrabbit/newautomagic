@@ -1,0 +1,20 @@
+<h2>Add/Edit Journals</h2> 
+<p>--Under Construction--</p>
+<form>
+	<label for="title"> Journal Title: </label>
+    <input type="text" id="title" name="title"> <br>
+    <label> Impact Factor:
+          <input type="text" id="IF" name="IF"> <br>
+        </label>
+        <label> IF Link (these will be served automatically eventually)
+          <input type="text" id="IFLink" name="IFLink"> <br>     
+        </label>
+  <label> No Ranking?
+    <input type="checkbox" class="noRankCheck" id="noRankCheck">
+  </label>    <br><br> 
+  
+  <button type="submit" [disabled]="true">
+          Save Journal
+        </button>
+
+</form>

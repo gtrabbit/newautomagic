@@ -1,0 +1,9 @@
+
+<form>
+	<label>Article Title<input type="text" name="title" required [(ngModel)]="model.title" ></label>
+	<label>Journal<input type="text" name="journal" required [(ngModel)]="model.journal" > </label>
+	<label>Year of Publication<input type="text" name="year" required [(ngModel)]="model.year" ></label>
+	<label>Citations?<input type="text" name="citations" [(ngModel)]="model.citations" ></label>
+	<button type="button" (click)="submit()">Submit</button>
+
+</form>

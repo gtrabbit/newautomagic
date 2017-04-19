@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+	margin: 0px;
+}
+
+button{
+	border: double rgb(220, 200, 180) 2px;
+	border-radius: 10px;
+}
+button:hover{
+	background-color: rgb(220, 200, 180)
+}

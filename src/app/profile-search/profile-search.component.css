@@ -1,0 +1,13 @@
+.panelHolder{
+	position: absolute;
+	display: flex;
+	top: 10%;
+	margin: auto;
+	margin-bottom: 20px;
+	width: 80vw;
+	background-color: white;
+	border: solid rgb(150,170,200);
+	box-shadow: 5px 12px 12px;
+	padding: 1%;
+
+}
