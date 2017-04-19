@@ -51,7 +51,7 @@ res.send ("okay")
 
 app.post("/getranks", function(req, res){
    const cb = function(data){
-  console.log(data)
+  
     res.send(data)
   }
 
