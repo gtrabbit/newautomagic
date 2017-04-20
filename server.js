@@ -36,14 +36,23 @@ app.get("/pbf", function(req, res){
 })
 
 app.get("/norank", function(req, res){
-  let journal = Object.body;
-  console.log(journal);
+   var body = [];
+    req.on('data', function(chunk) {
+      body.push(chunk);
+        }).on('end', function() {
+            body = Buffer.concat(body).toString();
+            if (body) {
+              body = JSON.parse(body);
+              ranks.module.markAsUnranked(body, cb);
+
+            } 
+        });
   
   const cb = function(){
-    res.send({msg: journal + " marked as unranked"});
+    res.send({msg: body + " marked as unranked"});
     
   }
-res.send ("okay")
+
  // ranks.module.markAsUnranked(journal, cb);
   
   
