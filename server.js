@@ -35,7 +35,7 @@ app.get("/pbf", function(req, res){
   res.send(avp.pbf)
 })
 
-app.get("/norank", function(req, res){
+app.post("/norank", function(req, res){
    var body = [];
     req.on('data', function(chunk) {
       body.push(chunk);

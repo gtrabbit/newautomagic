@@ -8,8 +8,8 @@ export class NoRankService {
   constructor(private http: Http) { }
 
   submitNoRank(name): Observable<Response> {
-   	let reqOpts = new RequestOptions({body: name});
-   	return this.http.get('./norank', reqOpts)
+   	//let reqOpts = new RequestOptions({body: name});
+   	return this.http.post('./norank', name)
   }
 
 }
