@@ -42,7 +42,6 @@ app.post("/norank", function(req, res){
         }).on('end', function() {
             body = Buffer.concat(body).toString();
             if (body) {
-              body = JSON.parse(body);
               ranks.module.markAsUnranked(body, cb);
 
             } 

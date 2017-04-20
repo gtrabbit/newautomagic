@@ -46,7 +46,10 @@ export class EditJournalComponent implements OnInit, AfterContentInit {
   markAsNoRank(i){
     this.nR.submitNoRank(this.journals[i])
       .subscribe(
-        body => {console.log(body.json());
+        body => {
+          console.log("this happens")
+
+          console.log(body.json());
           this.disabledArr[i] = true;
 
         },
