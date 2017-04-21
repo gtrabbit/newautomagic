@@ -22,6 +22,25 @@ app.get("/", function(req, res){
 
 })
 
+app.post("/submitIFL", function(req, res){
+  var body = [];
+    req.on('data', function(chunk) {
+      body.push(chunk);
+        }).on('end', function() {
+            body = Buffer.concat(body).toString();
+            if (body) {
+              body = JSON.parse(body)
+              ranks.module.submitIFL(body, cb);
+
+            } 
+        });
+  
+  const cb = function(journal){
+    res.send({msg: "Link submitted for " +journal});
+    
+  }
+})
+
 app.get("/getpaperlist", function(req, res){
    let website = req._parsedUrl.query
    let cb = function (paperList){

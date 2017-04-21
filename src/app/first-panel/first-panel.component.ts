@@ -72,7 +72,6 @@ export class FirstPanelComponent implements OnInit, OnChanges {
 
   gotoMC(){
     this.displayState = 3;
-    console.log(this.displayState);
   }
 
   jumpBack(){
@@ -88,7 +87,6 @@ export class FirstPanelComponent implements OnInit, OnChanges {
   }
 
   check(name){
-    console.log(name);
     this.name = name;
    
   }
@@ -105,10 +103,7 @@ export class FirstPanelComponent implements OnInit, OnChanges {
 
   }
 
-  selectLog(f){
-    console.log(f)
 
-  }
 
   returnItem(i){
     this.journalList.push(this.removed.splice(i, 1)[0]) ;
@@ -154,16 +149,14 @@ export class FirstPanelComponent implements OnInit, OnChanges {
     }
    
     this.displayState++;
-    console.log(this.displayState)
+   
   }
 
   previous(){
     this.displayState--;
   }
 
-  log(){
-  	console.log(this.paperList);
-  }
+
 
 
 

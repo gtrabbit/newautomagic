@@ -27,13 +27,13 @@ export class DisplayRankingComponent implements OnInit, OnChanges {
 
   displayF(results, journal){
     if (!results.hasOwnProperty('rankedJournals')){
-      console.log("results sent from there?", results);
+     
 
       results = {rankedJournals: [results]};
     }
   	let display;
   		if (results.rankedJournals.length){
-  			console.log(results)
+  		
   			if (results.rankedJournals[0].noRank){
   				display = {formatted: "This journal has been marked as unranked"}
   			} else {

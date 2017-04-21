@@ -15,6 +15,7 @@ import { RankComponent } from './rank/rank.component';
 import { EditJournalComponent } from './edit-journal/edit-journal.component';
 import { TopCitedComponent } from './top-cited/top-cited.component';
 import { DisplayRankingComponent } from './display-ranking/display-ranking.component';
+import { AddIFLinkComponent } from './add-iflink/add-iflink.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DisplayRankingComponent } from './display-ranking/display-ranking.compo
     RankComponent,
     EditJournalComponent,
     TopCitedComponent,
-    DisplayRankingComponent
+    DisplayRankingComponent,
+    AddIFLinkComponent
   ],
   imports: [
     BrowserModule,

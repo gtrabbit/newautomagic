@@ -91,9 +91,21 @@ const makeArray = function(journalList){
   return newList;
 }
 
+const submitIFL = function(body, cb){
+  rank.findOne({journalName: body.journal.journalName}, function(err, result){
+    if (err){console.log(err)}
+    result.IFLink = body.link;
+    result.save();
+    cb(body.journal);
+
+  })
+}
+
+
 exports.module = {
   makeArray: makeArray,
   checkForRanks: checkForRanks,
   makeClean: clean,
-  markAsUnranked: markAsUnranked
+  markAsUnranked: markAsUnranked,
+  submitIFL: submitIFL
 }

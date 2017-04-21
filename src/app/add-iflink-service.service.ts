@@ -3,12 +3,17 @@ import { Http, Response, RequestOptions, RequestMethod, Request, Headers } from 
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class NoRankService {
+export class AddIFLinkServiceService {
 
   constructor(private http: Http) { }
 
-  submitNoRank(name): Observable<Response> {
-   	return this.http.post('./norank', name)
+  submitIFL(link, journal): Observable<Response>{
+  	return this.http.post("./submitIFL", {
+  		journal: journal,
+  		link: link
+  	})
+
+
   }
 
 }
