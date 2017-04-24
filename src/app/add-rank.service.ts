@@ -3,12 +3,15 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class NoRankService {
+export class AddRankService {
 
   constructor(private http: Http) { }
 
-  submitNoRank(name): Observable<Response> {
-   	return this.http.post('./norank', name)
+  submitRank(sub): Observable<Response>{
+  	return this.http.post('./submitrank', sub)
+
+
+
   }
 
 }

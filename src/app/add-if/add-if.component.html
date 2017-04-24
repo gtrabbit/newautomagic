@@ -1,20 +1,36 @@
 <h2>Add/Edit Journals</h2> 
-<p>--Under Construction--</p>
+  <p>Under Construction, still</p>
 <form>
 	<label for="title"> Journal Title: </label>
-    <input type="text" id="title" name="title"> <br>
+    <input type="text" id="title" name="title" [(ngModel)]="model.journalName" > <br>
     <label> Impact Factor:
-          <input type="text" id="IF" name="IF"> <br>
+          <input type="text" id="IF" name="IF" [(ngModel)]="model.IF" > <br>
         </label>
-        <label> IF Link (these will be served automatically eventually)
-          <input type="text" id="IFLink" name="IFLink"> <br>     
+        <label> IF Link 
+          <input type="text" id="IFLink" name="IFLink" [(ngModel)]="model.IFLink" > <br>     
         </label>
+<button (click)="addGSRank()" >Add GS Rank</button>
+<div *ngFor="let items of model.GSRank; let i = index;">
+<label> GS Category:
+    <input type="text" name="RankCat" [(ngModel)]="model.GSRank[i].cat" required>
+  </label>
+  <label> Ranking:
+    <input type="text" name="RankNum" [(ngModel)]="model.GSRank[i].rank">
+  </label>
+  <label> Link to Category Page:
+    <input type="text" name="RankLink" [(ngModel)]="model.GSRank[i].catLink.link" >
+  </label>
+  <button (click)="remove(i)">Remove</button>
+</div>
+
+
   <label> No Ranking?
-    <input type="checkbox" class="noRankCheck" id="noRankCheck">
+    <input type="checkbox" class="noRankCheck" id="noRankCheck" [checked]="info" (change)="info = !info">
   </label>    <br><br> 
   
-  <button type="submit" [disabled]="true">
+  <button type="submit" (click)="onSubmit()" >
           Save Journal
         </button>
 
 </form>
+<button (click)="log()" >log </button>

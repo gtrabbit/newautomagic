@@ -14,8 +14,6 @@ const scrapeProfile = function (website, cb){
     body = body.replace(/&#8211;/g, "--");
     body = body.replace(/&#8208;/g, "-");
     body = body.replace(/&amp;/g, "&");
-    body = body.replace(/&#8221;/g, '"');
-    body = body.replace(/&#8220;/g, '"')
    
      let titles = [];
     let init1 = body.match(/gsc_a_at">(.*?)<\/a>/g);
@@ -28,8 +26,11 @@ const scrapeProfile = function (website, cb){
     
     init2.forEach(function(a){
       let b = a.slice(27, a.length-5);
-      b = b.match(/([,:a-zA-Z&-]\s*)+(?=\s\d*|\W*)/)[0].trim().toLowerCase();
-      b = titleCase.titleCase(b);
+      b = b.match(/([,:a-zA-Z&-]\s*)+(?=\s\d*|\W*)/)[0].trim();
+      if (b.slice(-1) === ","){
+        b = b.slice(0, b.length-1);
+      }
+    
       journals.push(b);
    
     })

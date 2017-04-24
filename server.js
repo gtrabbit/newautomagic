@@ -5,6 +5,9 @@ var app = express();
 const ranks = require('./server/rankingDB');
 const avp = require('./server/averagesPercentiles');
 const path = require('path');
+const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+mongoose.connect("mongodb://HLG:automagic123@ds129050.mlab.com:29050/learningthis");
 
 app.use(bodyParser.urlencoded({extended: false}))
 
@@ -41,12 +44,23 @@ app.post("/submitIFL", function(req, res){
   }
 })
 
-app.get("/getpaperlist", function(req, res){
-   let website = req._parsedUrl.query
+app.post("/getpaperlist", function(req, res){
+  var body = [];
+    req.on('data', function(chunk) {
+      body.push(chunk);
+        }).on('end', function() {
+            body = Buffer.concat(body).toString();
+            if (body) {
+              pScan.scrape(body, cb);
+
+            } 
+        });
+
+
    let cb = function (paperList){
      res.send(paperList);
   }
-  pScan.scrape(website, cb);
+  
   
 });
 

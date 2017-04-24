@@ -1,6 +1,6 @@
 <div class="holder">
 	<span [ngClass]= "{'struck': paper.exclude}">
-  	"{{paper.title}}," <em>{{paper.journal}}</em>, {{paper.year}}. <strong> {{paper.citations}} citations </strong>
+  	&ldquo;<span [innerHTML]="paper.title" ></span>,&rdquo; <em>{{paper.journal}}</em>, {{paper.year}}. <strong> {{paper.citations}} citations </strong>
 	</span>
 	<div class="buttons">
 		<button class="btn-remove" (click)="remove()"> {{excludeMsg}} </button>

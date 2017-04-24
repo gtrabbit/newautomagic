@@ -103,6 +103,11 @@ export class FirstPanelComponent implements OnInit, OnChanges {
 
   }
 
+  clean (a){
+   a = a.toLowerCase().replace(/\s(and|&)\s/g, " ").replace(/[^\s\w]/g, " ").replace(/\s+/g, " ").replace(/the/gi, "").trim();
+  return (a);
+}
+
 
 
   returnItem(i){
@@ -120,12 +125,14 @@ export class FirstPanelComponent implements OnInit, OnChanges {
             this.included.push(item);
             }
           }
-
-        for (let item of this.included){
-          this.editShow.push(false);
-          if (!this.journalList.includes(item.journal)){
-            this.journalList.push(item.journal);
+        this.journalList.push(this.included[0].journal)  
+        for (let item in this.included){
+          if (this.journalList.every((a) => {
+            return this.clean(a) !== this.clean(this.included[item].journal)
+          })) {
+            this.journalList.push(this.included[item].journal)
           }
+
         }
 
         break;

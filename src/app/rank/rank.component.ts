@@ -1,4 +1,4 @@
-import { Component, AfterContentInit, Input } from '@angular/core';
+import { Component, AfterContentChecked, Input } from '@angular/core';
 import { FormatRanksService } from '../format-ranks.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormatRanksService } from '../format-ranks.service';
   templateUrl: './rank.component.html',
   styleUrls: ['./rank.component.css']
 })
-export class RankComponent implements AfterContentInit {
+export class RankComponent implements AfterContentChecked {
 
 	@Input() public rankings: any = {
 		rankedJournals: [],
@@ -23,19 +23,13 @@ export class RankComponent implements AfterContentInit {
 
   constructor(private formatRanks: FormatRanksService) { }
 
-  ngAfterContentInit() {
+  ngAfterContentChecked() {
     for (let item in this.rankings.rankedJournals){
      
       if (this.rankings.rankedJournals[item].noRank){
-        console.log("found a no-rank journal!", this.rankings.rankedJournals[item].journalName);
-     
         this.unRanked.push(this.rankings.rankedJournals.splice(item, 1));
-        
-
       }
-
     }
-
    }
 
   addRank(e){

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 mongoose.Promise = require('bluebird');
-mongoose.connect("mongodb://HLG:automagic123@ds129050.mlab.com:29050/learningthis");
+
 
 
 const rankingSchema = new Schema({

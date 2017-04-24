@@ -16,6 +16,8 @@ import { EditJournalComponent } from './edit-journal/edit-journal.component';
 import { TopCitedComponent } from './top-cited/top-cited.component';
 import { DisplayRankingComponent } from './display-ranking/display-ranking.component';
 import { AddIFLinkComponent } from './add-iflink/add-iflink.component';
+import { AddRankService } from './add-rank.service';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +40,7 @@ import { AddIFLinkComponent } from './add-iflink/add-iflink.component';
     FormsModule,
     HttpModule
   ],
-  providers: [ TitleCaseService ],
+  providers: [ TitleCaseService, AddRankService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

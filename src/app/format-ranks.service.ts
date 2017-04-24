@@ -49,7 +49,11 @@ export class FormatRanksService {
       
 
  formatRanks(ranks, cats) {
-    let text = "<strong> Ranked "
+   let text;
+   if (ranks.length){
+      text = "<strong> Ranked "
+   }
+   
     for (let i=0; i<ranks.length; i++){
       text = text.concat("#" + ranks[i] + "</strong> in " + cats[i])
       if ((ranks.length - i) === 2){

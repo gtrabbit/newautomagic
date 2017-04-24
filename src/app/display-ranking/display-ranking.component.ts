@@ -17,7 +17,7 @@ export class DisplayRankingComponent implements OnInit, OnChanges {
   constructor(private FRS: FormatRanksService) { }
 
   ngOnInit() {
-  //	this.ranking = this.displayF(this.results, this.journal);
+
   }
 
   ngOnChanges(){
