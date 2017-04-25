@@ -8,6 +8,8 @@ import { FormatRanksService } from '../format-ranks.service';
 })
 export class DisplayRankingComponent implements OnInit, OnChanges {
 
+
+ 
 	@Input() public results: any;
 	@Input() public journal: any;
 	public ranking: any;
@@ -23,12 +25,11 @@ export class DisplayRankingComponent implements OnInit, OnChanges {
   ngOnChanges(){
     this.ranking = this.displayF(this.results, this.journal);
 
+
   }
 
   displayF(results, journal){
     if (!results.hasOwnProperty('rankedJournals')){
-     
-
       results = {rankedJournals: [results]};
     }
   	let display;
@@ -38,6 +39,7 @@ export class DisplayRankingComponent implements OnInit, OnChanges {
   				display = {formatted: "This journal has been marked as unranked"}
   			} else {
   				display = this.FRS.extractCats(results.rankedJournals[0]);
+
   			}
   		} else {
   			display = {formatted: "Sorry, there was no match."};

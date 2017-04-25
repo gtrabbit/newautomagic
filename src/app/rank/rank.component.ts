@@ -1,73 +1,67 @@
-import { Component, AfterContentChecked, Input } from '@angular/core';
-import { FormatRanksService } from '../format-ranks.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormatRanksService} from '../format-ranks.service';
 
 @Component({
   selector: 'app-rank',
   templateUrl: './rank.component.html',
   styleUrls: ['./rank.component.css']
 })
-export class RankComponent implements AfterContentChecked {
+export class RankComponent implements OnInit {
 
 	@Input() public rankings: any = {
 		rankedJournals: [],
 		noMatch: []
 		};
 
-	public gsRankLinks: Array<any> = [];
-	public gsRankNumbers: Array<Array<Number>> = [];
-	public gsRankCats: Array<string> = [];
-	public formattedRanks: Array<string> = [];
 	public showRankToggle: boolean = false;
   public unRanked: Array<string> = [];
+  gsRankCats: Array<string> = [];
+  gsRankLinks: Array<string> = [];
+  gsRankNumbers: Array<number[]> = [];
+ 
 
 
-  constructor(private formatRanks: FormatRanksService) { }
+  constructor(private FRS: FormatRanksService) { }
 
-  ngAfterContentChecked() {
-    for (let item in this.rankings.rankedJournals){
-     
-      if (this.rankings.rankedJournals[item].noRank){
-        this.unRanked.push(this.rankings.rankedJournals.splice(item, 1));
+  ngOnInit() {
+    for (let i = 0; i<this.rankings.rankedJournals.length; i++){
+      if (this.rankings.rankedJournals[i].noRank){
+        this.unRanked.push(this.rankings.rankedJournals.splice(i, 1));
+        i--;
       }
     }
    }
 
   addRank(e){
     this.rankings.rankedJournals.push(e);
-
   }
 
   showRanks(){
-  	this.gsRankNumbers = [];
-  	this.gsRankLinks = [];
-  	this.gsRankCats = [];
+    this.acquireLinks();
   	this.showRankToggle = !this.showRankToggle;
-  	if (this.showRankToggle){
+    
+  }
 
-  		for (let item of this.rankings.rankedJournals){ 
-
-      
-  			if (item.hasOwnProperty("GSRank")){
-  				let jGSRanks = [];
-  				let jGSCats = [];
-  				item.GSRank.forEach((a) => {
-  					jGSRanks.push(a.rank);
-  					jGSCats.push(a.cat);
-  					if (!this.gsRankCats.includes(a.cat)){
-  						this.gsRankCats.push(a.cat);
-  						this.gsRankLinks.push(a.catLink.link);
-  						this.gsRankNumbers.push([Number(a.rank)]);
-  					} else {
-  						this.gsRankNumbers[this.gsRankLinks.indexOf(a.catLink.link)].push(a.rank)
-  						this.gsRankNumbers[this.gsRankLinks.indexOf(a.catLink.link)].sort(); 
-  					}
-   				})
-  				this.formattedRanks.push(this.formatRanks.formatRanks(jGSRanks, jGSCats))
-  		}
-   	} 
-
-  	}
-
+  acquireLinks(){
+    for (let item of this.rankings.rankedJournals){
+      if (item.hasOwnProperty("GSRank")){
+        let jGSRanks = [];
+        let jGSCats = [];
+        item.GSRank.forEach((a) => {
+          jGSRanks.push(a.rank);
+          jGSCats.push(a.cat);
+          if (!this.gsRankCats.includes(a.cat)){
+            this.gsRankCats.push(a.cat);
+            this.gsRankLinks.push(a.catLink.link);
+            this.gsRankNumbers.push([Number(a.rank)]);
+          } else {
+            this.gsRankNumbers[this.gsRankLinks.indexOf(a.catLink.link)].push(a.rank)
+            this.gsRankNumbers[this.gsRankLinks.indexOf(a.catLink.link)].sort(); 
+          }
+         })
+        
+      }
+     } 
   }
 
   

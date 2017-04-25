@@ -5,6 +5,15 @@
 	<button type="submit" id="searchButton" (click)="search([input.value])" >Search</button>
 
 </form>
+<div *ngIf="searchHappened">
+<app-display-ranking [results]="results" [journal]="journal"> </app-display-ranking>
+<hr>
+<app-display-links *ngFor="let item of displays.links; let i=index" [display]="{
+	link: displays.links[i],
+	cat: displays.cats[i],
+	numbers: displays.numbers[i]
+	}"
+	> </app-display-links>
+	
 
-<app-display-ranking *ngIf="searchHappened" [results]="results" [journal]="journal"> </app-display-ranking>
-
+</div>

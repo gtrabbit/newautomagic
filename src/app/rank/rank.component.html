@@ -45,12 +45,13 @@
 	</div>
 
 <p>Visit each link and save the pdf, using numbers below to signal to package team. For now, this is the fastest route.</p>
-<ul>
-	<li *ngFor = "let item of gsRankLinks; let i = index">
-		<a href="{{item}}" target="_blank"> {{gsRankCats[i]}} </a> <p> suffix filename with {{gsRankNumbers[i]}}</p>
-	</li>
 
-</ul>
+<app-display-links *ngFor="let item of gsRankCats; let i=index" [display]="{
+	link: gsRankLinks[i],
+	cat: gsRankCats[i],
+	numbers: gsRankNumbers[i]}"> </app-display-links>
+
+
 	
 		<span *ngFor = "let item of rankings.rankedJournals; let i = index">
 			<a *ngIf="rankings.rankedJournals[i].IFLink" href="{{rankings.rankedJournals[i].IFLink}}" target="_blank">-- {{rankings.rankedJournals[i].journalName}} --</a>

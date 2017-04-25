@@ -7,7 +7,11 @@ export class FormatRanksService {
   constructor() { }
 
 
+
+
+
     extractCats(ranking){
+     let journalName = ranking.journalName;
      let gsRankNumbers = [];
      let gsRankCats = [];
      let gsRankLinks = [];
@@ -35,10 +39,14 @@ export class FormatRanksService {
               gsRankNumbers[gsRankLinks.indexOf(a.catLink.link)].sort(); 
             }
            })
-          formattedRanks.push(this.formatRanks(jGSRanks, jGSCats))
+       
+             formattedRanks.push(this.formatRanks(jGSRanks, jGSCats))
+         
+         
       }
       return {
         formatted: formattedRanks,
+        journalName: journalName,
         numbers: gsRankNumbers,
         cats: gsRankCats,
         links: gsRankLinks,
