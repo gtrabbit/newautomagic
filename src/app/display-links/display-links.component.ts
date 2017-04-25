@@ -7,7 +7,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DisplayLinksComponent implements OnInit {
 
-	@Input() display: Object;
+	@Input() display = {
+		link: undefined,
+		cat: undefined,
+		numbers: undefined
+	}
 
   constructor() { }
 
