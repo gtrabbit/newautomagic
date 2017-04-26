@@ -1,6 +1,6 @@
 <ul class="journalList-holder">
 	<li *ngFor = "let item of journals; let i = index" >
-		<em>{{item}}</em> <span *ngIf="disabledArr[i]">-- marked as unranked </span>
+		<em>{{item}}</em> 
 		<div>
 		<button (click)="edit(i)" *ngIf="!editShow[i]" [disabled]="disabledArr[i]"> Edit </button>
 		<button (click)="markAsNoRank(i)" [disabled]="disabledArr[i]" > Mark as Unranked </button>

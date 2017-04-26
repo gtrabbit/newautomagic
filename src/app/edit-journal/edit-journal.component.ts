@@ -33,7 +33,7 @@ export class EditJournalComponent implements OnInit {
 
   addRank(r, i){
   	this.addedRanks.emit(r);
-    this.journals.splice(i, 1, "Added to list");
+    this.journals.splice(i, 1, "--Added to list--");
     delete this.results[i];
     this.disabledArr[i] = true;
   }
@@ -43,6 +43,7 @@ export class EditJournalComponent implements OnInit {
       .subscribe(
         body => {
           this.disabledArr[i] = true;
+          this.journals[i].concat(" --marked as unranked");
 
         },
         error => console.log(error))
