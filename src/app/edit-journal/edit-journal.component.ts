@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, AfterContentInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { RankingService } from '../ranking.service';
 import { NoRankService } from '../no-rank.service';
 
@@ -8,7 +8,7 @@ import { NoRankService } from '../no-rank.service';
   styleUrls: ['./edit-journal.component.css'],
   providers: [NoRankService]
 })
-export class EditJournalComponent implements OnInit, AfterContentInit {
+export class EditJournalComponent implements OnInit {
 
 	@Input() public journals: string[] = [];
 	public results: Object = {};
@@ -25,13 +25,6 @@ export class EditJournalComponent implements OnInit, AfterContentInit {
 
   }
 
-  ngAfterContentInit(){
-    	for (let item in this.results){
-  		console.log(item);
-
-  	}
-  }
-
 
 
   log(){
@@ -40,16 +33,15 @@ export class EditJournalComponent implements OnInit, AfterContentInit {
 
   addRank(r, i){
   	this.addedRanks.emit(r);
-    this.results = {};
+    this.journals.splice(i, 1, "Added to list");
+    delete this.results[i];
+    this.disabledArr[i] = true;
   }
 
   markAsNoRank(i){
     this.nR.submitNoRank(this.journals[i])
       .subscribe(
         body => {
-          console.log("this happens")
-
-          console.log(body.json());
           this.disabledArr[i] = true;
 
         },
@@ -70,7 +62,7 @@ export class EditJournalComponent implements OnInit, AfterContentInit {
     		.subscribe(
     			body => {
             this.results[i] = body.json();
-            console.log(this.results);
+            
 
           }
     	

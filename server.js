@@ -25,6 +25,26 @@ app.get("/", function(req, res){
 
 })
 
+app.post('/associate', function(req, res){
+  const cb = function(journal, ranking){
+    res.send({msg: "we recieved " + journal + ranking})
+  }
+  var body = [];
+    req.on('data', function(chunk) {
+      body.push(chunk);
+        }).on('end', function() {
+            body = Buffer.concat(body).toString();
+            if (body) {
+              body = JSON.parse(body)
+              cb(body.journal, body.result)
+
+            } 
+        });
+
+
+
+})
+
 app.post("/submitIFL", function(req, res){
   var body = [];
     req.on('data', function(chunk) {
