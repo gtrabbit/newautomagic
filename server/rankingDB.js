@@ -101,11 +101,89 @@ const submitIFL = function(body, cb){
   })
 }
 
+const makeNewJournalRanking = function(journal, cb){
+  let message = "success";
+  let newJournal = new rank({
+    journalName: journal.journalName,
+    search: clean(journal.journalName),
+    noRank: journal.noRank,
+    GSRank: journal.GSRank,
+    complete: true,
+    IF: journal.IF,
+    IFLink: journal.IFLink
+  })
+  newJournal.save(function(err){
+    if (err){
+      message = "failed to create new journal";
+    }
+    cb(message);
+  })
+}
+
+const updateJournal = function(journal, newInfo, cb){
+  let message = "success for ";
+  let props = Object.keys(newInfo);
+  props.forEach(function(a){
+    if (a === "GSRank"){
+      let newCats = [];
+      newInfo.GSRank.forEach(function(a){
+        newCats.push(a.cat);
+      })
+      let oldCats = [];
+      journal.GSRank.forEach(function(a, i){
+        oldCats.push(a.cat, i);
+      })
+    
+      newCats.forEach(function(a, i){
+        if (oldCats.includes(a)){
+          journal.GSRank[oldCats[oldCats.indexOf(a)+1]] = newInfo.GSRank[i];
+        } else {
+          journal.GSRank.push(newInfo.GSRank[i]);
+        }
+      })
+
+
+    } else {
+      journal[a] = newInfo[a];
+    }    
+  })
+  journal.save(function(err){
+    if (err){
+      message = "failed";
+    } else {
+      cb(message + journal);
+    }
+
+  })
+
+
+
+}
+
+
+
+const submitnew = function(body, cb){
+  const callBack2 = function(message){
+    cb(message);
+  }
+
+  const callBack = function (results){
+    if (results.noMatch.length){
+      makeNewJournalRanking(body, callBack2)
+    } else {
+      updateJournal(results.rankedJournals[0], body, callBack2)
+    }
+
+  }
+  checkForRanks([body.journalName], callBack);
+}
+
 
 exports.module = {
   makeArray: makeArray,
   checkForRanks: checkForRanks,
   makeClean: clean,
   markAsUnranked: markAsUnranked,
-  submitIFL: submitIFL
+  submitIFL: submitIFL,
+  submitnew: submitnew
 }

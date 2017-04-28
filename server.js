@@ -25,6 +25,23 @@ app.get("/", function(req, res){
 
 })
 
+app.post("/submitrank", function(req, res){
+   const cb = function(message){
+    res.send({msg: message})
+  }
+  var body = [];
+    req.on('data', function(chunk) {
+      body.push(chunk);
+        }).on('end', function() {
+            body = Buffer.concat(body).toString();
+            if (body) {
+              body = JSON.parse(body)
+              ranks.module.submitnew(body, cb);
+
+            } 
+        });
+})
+
 app.post('/associate', function(req, res){
   const cb = function(journal, ranking){
     res.send({msg: "we recieved " + journal + ranking})
@@ -105,8 +122,7 @@ app.post("/norank", function(req, res){
     
   }
 
- // ranks.module.markAsUnranked(journal, cb);
-  
+
   
 });
 
@@ -124,23 +140,9 @@ app.post("/getranks", function(req, res){
             if (body) {
               body = JSON.parse(body).journalList;
               ranks.module.checkForRanks(body, cb);
-
             } 
         });
- 
-
-
-
-
-  
- 
- 
- 
- // ranks.module.checkForRanks(journalList, cb)
-  
 });
-
-
 
 
 var listener = app.listen(process.env.PORT || 8080);

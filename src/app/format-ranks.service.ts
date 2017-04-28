@@ -70,8 +70,9 @@ export class FormatRanksService {
        
         text = text.concat(", <strong>")
       }
+     
     }
- 
+    text = text.concat(" by Google Scholar")
     return text;
   }
   

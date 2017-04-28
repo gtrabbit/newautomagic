@@ -33,10 +33,6 @@ export class AddIFComponent implements OnInit {
   
   }
 
-  clean(a){
-  	a = a.toLowerCase().replace(/\s(and|&)\s/g, " ").replace(/[^\s\w]/g, " ").replace(/\s+/g, " ").trim();
-  	return (a);
-  }
 
   log(){
   	console.log(this.model);
@@ -93,13 +89,15 @@ export class AddIFComponent implements OnInit {
   	// 	this.model.IFLink //IFLink
   	// 	);
     //	this.ARS.submitRank(submission).subscribe();
-    this.model.search = this.clean(this.model.journalName);
+  
     this.model.noRank = this.info;
     this.model.GSRank = this.compileGSRanks();
     this.model.complete = true;
     this.model.updated = new Date();
+    this.ARS.submitRank(this.model).subscribe(
+      body => console.log(body.json().msg));
 
-	console.log(this.model);
+
 
   }
 
