@@ -9,7 +9,9 @@ export class FormatRanksService {
 
 
 
-
+//utility-- takes a ranking and returns an object (seen below)
+//formatted is a string to be displayed; the other info is 
+//useful for generating the links and numbers to suffix files
     extractCats(ranking){
      let journalName = ranking.journalName;
      let gsRankNumbers = [];
@@ -21,9 +23,6 @@ export class FormatRanksService {
        IF = ranking.IF;
      } 
      
-
-
-
      if (ranking.hasOwnProperty("GSRank")){
           let jGSRanks = [];
           let jGSCats = [];
@@ -55,9 +54,9 @@ export class FormatRanksService {
      } 
 
       
-
+      //creates string for displaying GS ranks
  formatRanks(ranks, cats) {
-   let text;
+   let text = "";
    if (ranks.length){
       text = "<strong> Ranked "
    }
@@ -72,7 +71,10 @@ export class FormatRanksService {
       }
      
     }
-    text = text.concat(" by Google Scholar")
+     if (ranks.length){
+      text = text.concat(" by Google Scholar")
+   }
+    
     return text;
   }
   

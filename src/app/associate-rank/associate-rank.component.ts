@@ -20,8 +20,12 @@ export class AssociateRankComponent implements OnInit {
   }
 
  
-
+//is called regardless, but everything is inside that if statement
+//which is determined by value of the checkbox. sends name of
+//journal to server along with an alternative search term
+//user would like to associate with it. 
   associate(){
+    console.log("associate function is called by client")
   	if (this.goAhead){
   		console.log(this.journal, this.result);
   		this.http.post('./associate', {

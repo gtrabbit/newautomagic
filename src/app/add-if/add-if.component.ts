@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Pipe } from '@angular/core';
 import { Ranking } from '../ranking';
 import { AddRankService } from '../add-rank.service';
 
@@ -9,8 +9,20 @@ import { AddRankService } from '../add-rank.service';
 })
 export class AddIFComponent implements OnInit {
 
+  response: string;
+  showResponse: Boolean = false;
+	@Input() model: Ranking = new Ranking(
+    undefined, undefined, new Date(), false, false, {
+      rank: undefined,
+      cat: undefined,
+      catLink: {
+        DL: false,
+        link: undefined
+      }
+    }, undefined, undefined);
 
-	model: Ranking; 
+
+  ; 
 	info: boolean;
 
 
@@ -20,25 +32,15 @@ export class AddIFComponent implements OnInit {
   constructor(private ARS: AddRankService) { }
 
   ngOnInit() {
-
-  	this.model = new Ranking(
-		"", "", new Date(), false, false, {
-  		rank: undefined,
-  		cat: undefined,
-  		catLink: {
-  			DL: false,
-  			link: undefined
-  		}
-  	}, null, "");
-  
-  }
+  	
+    }
 
 
   log(){
   	console.log(this.model);
   }
 
-
+//adds in additional GS ranks if needed
   addGSRank(){
   	this.model.GSRank.splice(this.model.GSRank.length, 0, {
   		rank: undefined,
@@ -52,15 +54,14 @@ export class AddIFComponent implements OnInit {
   
 
   }
-
+//or removes them
   remove(i){
   	this.model.GSRank.splice(i, 1);
   }
 
   
-
+//takes form into and pushes into an array needed for rank Schema
   compileGSRanks(): Array<Object>{
-
   	let GSRanks = [];
   	for (let index in this.model.GSRank){
   		GSRanks.push({
@@ -75,30 +76,19 @@ export class AddIFComponent implements OnInit {
   	return GSRanks;
   }
 
+//finalizes the rank and sends to the DB
   onSubmit(){
-  	console.log(this.info);
-  
-  	// let submission = new Ranking(
-  	// 	this.model.journalName, //journalName
-  	// 	this.clean(this.model.journalName), //search
-  	// 	new Date(), //updated 
-  	// 	this.isItRanked(this.info), //noRank
-  	// 	true, //completed
-  	// 	this.compileGSRanks(), //GSRank
-  	// 	this.model.IF, //IF
-  	// 	this.model.IFLink //IFLink
-  	// 	);
-    //	this.ARS.submitRank(submission).subscribe();
-  
+    this.showResponse = false;
     this.model.noRank = this.info;
     this.model.GSRank = this.compileGSRanks();
     this.model.complete = true;
     this.model.updated = new Date();
     this.ARS.submitRank(this.model).subscribe(
-      body => console.log(body.json().msg));
+      body => {
+        this.showResponse = true;
+        this.response = body.json().msg.slice(0, 7);
 
-
-
+      });
   }
 
 }

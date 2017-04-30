@@ -43,8 +43,8 @@ app.post("/submitrank", function(req, res){
 })
 
 app.post('/associate', function(req, res){
-  const cb = function(journal, ranking){
-    res.send({msg: "we recieved " + journal + ranking})
+  const cb = function(result){
+    res.send({msg: result})
   }
   var body = [];
     req.on('data', function(chunk) {
@@ -52,13 +52,32 @@ app.post('/associate', function(req, res){
         }).on('end', function() {
             body = Buffer.concat(body).toString();
             if (body) {
-              body = JSON.parse(body)
-              cb(body.journal, body.result)
-
-            } 
+              body = JSON.parse(body);
+              ranks.module.associate(body.journal, body.result, cb);
+              } 
         });
 
 
+
+})
+
+app.post('/delete', function(req, res){
+  const cb = function(data){
+    res.send({msg: data})
+  }
+  var body = [];
+    req.on('data', function(chunk) {
+      body.push(chunk);
+        }).on('end', function() {
+            body = Buffer.concat(body).toString();
+            if (body) {
+              body = JSON.parse(body);
+              if (body.search.length){
+                ranks.module.delete(body, cb);
+              }
+              
+              } 
+        });
 
 })
 

@@ -37,12 +37,18 @@ export class RankComponent implements OnInit {
   }
 
   showRanks(){
-    this.acquireLinks();
+    if (!this.showRankToggle){
+      this.acquireLinks();
+    }
+    
   	this.showRankToggle = !this.showRankToggle;
     
   }
 
   acquireLinks(){
+    this.gsRankLinks = [];
+    this.gsRankCats = [];
+    this.gsRankNumbers = [];
     for (let item of this.rankings.rankedJournals){
       if (item.hasOwnProperty("GSRank")){
         let jGSRanks = [];

@@ -1,4 +1,4 @@
-<h2>Add/Edit Journals</h2> 
+<h2>Add/Edit Journal</h2> 
 
 <form>
 	<label for="title"> Journal Title: </label>
@@ -9,7 +9,7 @@
         <label> IF Link 
           <input type="text" id="IFLink" name="IFLink" [(ngModel)]="model.IFLink" > <br>     
         </label>
-<button (click)="addGSRank()" >Add GS Rank</button>
+
 <div *ngFor="let items of model.GSRank; let i = index;">
 <label> GS Category:
     <input type="text" name="RankCat" [(ngModel)]="model.GSRank[i].cat" required>
@@ -20,17 +20,18 @@
   <label> Link to Category Page:
     <input type="text" name="RankLink" [(ngModel)]="model.GSRank[i].catLink.link" >
   </label>
-  <button (click)="remove(i)">Remove</button>
+  <br>
+  <button (click)="remove(i)">Remove</button><button (click)="addGSRank()" >Add GS Rank</button>
+
 </div>
 
-
+  <br>
   <label> No Ranking?
     <input type="checkbox" class="noRankCheck" id="noRankCheck" [checked]="info" (change)="info = !info">
   </label>    <br><br> 
   
   <button type="submit" (click)="onSubmit()" >
           Save Journal
-        </button>
+        </button> <span *ngIf="showResponse"> {{response}} </span>
 
 </form>
-<button (click)="log()" >log </button>

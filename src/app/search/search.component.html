@@ -5,6 +5,7 @@
 	<button type="submit" id="searchButton" (click)="search([input.value])" >Search</button>
 
 </form>
+
 <div *ngIf="searchHappened">
 <app-display-ranking [results]="results" [journal]="journal"> </app-display-ranking>
 <hr>
@@ -17,3 +18,9 @@
 	
 
 </div>
+<div *ngIf="searchHappened" >
+	<button (click)="edit()" [disabled]="!results.rankedJournals.length" >Edit</button>
+	<button (click)="delete(results.rankedJournals[0])" [disabled]="!results.rankedJournals.length" > Delete </button>
+</div>
+
+<app-add-if *ngIf="displayEdit" [model]="results.rankedJournals[0]" ></app-add-if>

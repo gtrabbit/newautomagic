@@ -1,16 +1,15 @@
 .main-form{
-	min-width: 300px;
+	width: 94%;
 	border: double rgb(10, 10, 30) 4px;
-	flex-grow: 1;
 	padding: 2%;
 	border-radius: 10px;
 	margin: 1%;
+	display: block;
 
 }
 
 .formHolder{
-	display: flex;
-	flex-wrap: wrap;
+	display: block;
 	max-width: 94vw;
 	margin: auto;
 	

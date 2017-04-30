@@ -27,9 +27,9 @@ export class AddPaperComponent implements OnInit {
     
   }
 
-
+//for adding papers to the paperList not represented by GS profile
+// also edits existing papers based on value of this.mode
   submit(){
-    console.log(this.mode)
     if (this.mode){
       let paper = new Article(this.model.title, this.model.journal, this.model.citations, this.model.year, false);
       this.paperList.unshift(paper);

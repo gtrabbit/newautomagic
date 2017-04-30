@@ -1,0 +1,11 @@
+[type="text"]{
+	display: block;
+	width: 90%;
+}
+[type=checkbox]{
+	width: 15px;
+	height: 15px;
+}
+button{
+	margin-left: 5px;
+}

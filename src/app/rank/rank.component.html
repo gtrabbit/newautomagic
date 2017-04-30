@@ -38,7 +38,7 @@
 <hr>
 		<p *ngFor="let item of rankings.rankedJournals let i = index" >
 		<span *ngIf="!rankings.rankedJournals[i].IFLink"> Submit IF for: {{rankings.rankedJournals[i].journalName}} 
-		<app-add-iflink [journal]="rankings.rankedJournals[i]"></app-add-iflink> </span>
+		<app-add-iflink [journal]="rankings.rankedJournals[i]"></app-add-iflink> </span> 
 
 		</p>
 
