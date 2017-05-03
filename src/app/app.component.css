@@ -5,6 +5,28 @@
 	border-radius: 10px;
 	margin: 1%;
 	display: block;
+	box-shadow: 0px 3px 5px rgb(20,40,20);
+	background-color: rgba(248,248,248,.5);
+
+}
+
+.container{
+	border: solid black 5px;
+	border-bottom: none;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	margin: 5px;
+	background: rgb(245, 245, 245);
+
+}
+
+h1{
+	text-align: center;
+}
+
+.main-form:hover{
+	background: linear-gradient(230deg, rgb(247,253,255), white, white, rgb(254,250,248), white);
+
 
 }
 
@@ -16,6 +38,17 @@
 }
 
 
+
+
+.header-holder{
+	padding: 0%;
+	height: 100%;
+	margin: 0px;
+	text-indent: 10px;
+	margin-bottom: -20px;
+
+
+}
 
 
 

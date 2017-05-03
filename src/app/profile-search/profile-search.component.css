@@ -2,16 +2,16 @@
 	position: absolute;
 	display: flex;
 	top: 10%;
-	margin: auto;
+	right: 3%;
 	margin-bottom: 20px;
-	width: 80vw;
+	width: 90vw;
 	background-color: white;
-	border: solid rgb(150,170,200);
+	border: solid rgb(50,0,10);
 	box-shadow: 5px 12px 12px;
 	padding: 1%;
-
+	border-radius: 20px;
 }
+
 input{
-	display: block;
-	width: 90%;
+	width: 60%;
 }

@@ -1,24 +1,16 @@
 p {
 	font-size: 11pt;
 }
-
 .exp-text{
 	font-size: 9pt;
+	border: solid black 1px;
+	padding: 1%;
+	border-radius: 5px;
+	font-style: italic;
 }
 
-app-paper{
-	margin: 5%;
-
-}
-
-button{
-	border-radius: 10px;
-	background-color: rgb(180,200,220);
-	border: double rgb(220, 200, 180) 2px;
-}
-
-button:hover{
-	background-color: rgb(220, 200, 180)
+.papers{
+	width: 90vw;
 }
 
 .journalList-holder li button{
@@ -28,7 +20,7 @@ button:hover{
 
 .journalList-holder{
 	display: block;
-	width: 500px;
+	width: 90%;
 }
 
 .journalList-holder li{

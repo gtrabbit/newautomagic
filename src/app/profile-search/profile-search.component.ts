@@ -38,12 +38,15 @@ export class ProfileSearchComponent implements OnInit {
 
 
   scan(website: string){
-    this.scanService.getPaperList(website)
-    				.subscribe(
-    					body => this.data = body.json(),
-    					error => console.log(error),
-    					() => this.toggleShow(true));
-    		
+    if (website.length){
+       this.scanService.getPaperList(website)
+            .subscribe(
+              body => this.data = body.json(),
+              error => console.log(error),
+              () => this.toggleShow(true));
+    }
+   
+   		
   }
 
 

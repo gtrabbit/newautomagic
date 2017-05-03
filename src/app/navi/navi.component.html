@@ -1,0 +1,3 @@
+<nav>
+<div *ngFor="let item of locations; let i=index" [ngClass]="{'selected': state===i}" (click)="navigate(i)" > {{locations[i]}} </div>
+</nav>

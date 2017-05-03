@@ -1,33 +1,43 @@
+<!-- <nav>
+	<button (click)="previous()" [disabled]="displayState<1">Previous</button>
+<button (click)="next()" [disabled]="displayState>2"> Next </button>
+<button (click)="close()">Finish</button><a href="#" (click)="gotoMC()">To Top-Cited</a>
+</nav> -->
+<app-navi [(state)]="displayState" (stateChange)="checkDisplayState()" ></app-navi>
+<hr>
+<h2 class="title">&emsp;{{panelTitle}}</h2>
+<div class="divider"></div>
 <div [ngSwitch]="displayState">
 
 <div class="first" *ngSwitchCase="0">
 
-<h4> Shazzam! </h4>
-<p class="exp-text">Here's what the magical kitty found. This is EVERYTHING listed on the profile, which may include abstracts, theses, who knows. Compare this list with the client's CV and remove items as appropriate. Use the form below to add published/accepted papers that do not appear here. Click "next" when complete:</p>
 
 
-<label> Jump to Most Cited List?
-	<button (click)="gotoMC()">Jump!</button>
-</label>
 
 
-<hr>
-<h4>Add Paper: </h4>
-<app-add-paper [(paperList)]="paperList" [mode]="true"></app-add-paper>
 
-<hr>
-<p> {{paperList.length}} papers found: </p>
-<hr>
+	
+
+
+
+
+
+
+<p class="center-text simple-underline"> {{paperList.length}} papers found: </p>
+
+
 	<div class="papers">
 
 		<app-paper *ngFor = "let item of paperList; let i = index" [(paper)]="paperList[i]" [index]="i">
   	
 		</app-paper>
-
+<p class="exp-text"> This is EVERYTHING listed on the profile, which may include abstracts, theses, etc. Compare this list with the client's CV and remove items as appropriate. (We only want rankings for journals where the client has published full-length articles). Use the form below to add published/accepted papers that do not appear here. Click "next" when complete:</p>
 	</div>
+	<h4>Add Paper: </h4>
+<app-add-paper [(paperList)]="paperList" [mode]="true"></app-add-paper>
 	</div>
 	<div class="papers" *ngSwitchCase="1">
-	<p> including {{included.length}} papers </p>
+	<p class="center-text simple-underline"> including {{included.length}} papers: </p>
 	<hr>
 
 			<h5>Search for these:</h5>
@@ -60,9 +70,9 @@
 
 	</div>
 		
-	<div *ngSwitchCase="2">
+	<div *ngSwitchCase="2" class="papers">
 		<p *ngIf = "!toggleRankPanel"> awaiting response from server... <br>(if you arrived here directly from the top-cited list, you will need to go to the <u (click)="jumpBack()"> beginning </u> and specify which journals will be queried before rankings will be displayed) </p>
-		<div *ngIf="toggleRankPanel">
+		<div *ngIf="toggleRankPanel" class="rankings">
 			<app-rank [rankings]="rankings"></app-rank>
 		</div>
 	</div>

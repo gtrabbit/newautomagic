@@ -12,7 +12,7 @@ export class AssociateRankComponent implements OnInit {
 	@Input() journal: string;
 	@Input() result: string;
 	goAhead = false;
-	res: string;
+	res: string = "";
 
   constructor(private http: Http) { }
 
@@ -33,7 +33,7 @@ export class AssociateRankComponent implements OnInit {
   			result: this.result
   		}).subscribe(
   			body => {
-  				console.log(body.json().msg);
+  				let res = body.json().msg;
   			},
   			error => console.log(error))
 

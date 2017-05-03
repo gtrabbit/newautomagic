@@ -19,6 +19,7 @@ import { AddIFLinkComponent } from './add-iflink/add-iflink.component';
 import { AddRankService } from './add-rank.service';
 import { DisplayLinksComponent } from './display-links/display-links.component';
 import { AssociateRankComponent } from './associate-rank/associate-rank.component';
+import { NaviComponent } from './navi/navi.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AssociateRankComponent } from './associate-rank/associate-rank.componen
     DisplayRankingComponent,
     AddIFLinkComponent,
     DisplayLinksComponent,
-    AssociateRankComponent
+    AssociateRankComponent,
+    NaviComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,8 @@
-<h2> Search Rankings </h2>
-<form>
-	<label for="searchInput">Journal Name</label>
+<h2 class="title main-title"> Search Rankings </h2>
+<form class="single-line-input-button">
+	<label for="searchInput">Journal Name:</label>
 	<input type="text" name="searchInput" id="searchInput" #input>
-	<button type="submit" id="searchButton" (click)="search([input.value])" >Search</button>
+	<button type="submit" id="searchButton"  (click)="search([input.value])" >Search</button>
 
 </form>
 
@@ -20,7 +20,7 @@
 </div>
 <div *ngIf="searchHappened" >
 	<button (click)="edit()" [disabled]="!results.rankedJournals.length" >Edit</button>
-	<button (click)="delete(results.rankedJournals[0])" [disabled]="!results.rankedJournals.length" > Delete </button>
+	<button class="warn" (click)="delete(results.rankedJournals[0])" [disabled]="!results.rankedJournals.length" > Delete </button>
 </div>
 
 <app-add-if *ngIf="displayEdit" [model]="results.rankedJournals[0]" ></app-add-if>

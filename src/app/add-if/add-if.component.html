@@ -1,4 +1,4 @@
-<h2>Add/Edit Journal</h2> 
+<h2 class="title main-title">Add/Edit Journal</h2> 
 
 <form>
 	<label for="title"> Journal Title: </label>
@@ -20,10 +20,11 @@
   <label> Link to Category Page:
     <input type="text" name="RankLink" [(ngModel)]="model.GSRank[i].catLink.link" >
   </label>
-  <br>
-  <button (click)="remove(i)">Remove</button><button (click)="addGSRank()" >Add GS Rank</button>
-
+ 
+  <button (click)="remove(i)" class="warn">Remove</button>
 </div>
+ <br>
+<button (click)="addGSRank()" >Add GS Rank</button>
 
   <br>
   <label> No Ranking?

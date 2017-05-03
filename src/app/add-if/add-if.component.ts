@@ -11,18 +11,8 @@ export class AddIFComponent implements OnInit {
 
   response: string;
   showResponse: Boolean = false;
-	@Input() model: Ranking = new Ranking(
-    undefined, undefined, new Date(), false, false, {
-      rank: undefined,
-      cat: undefined,
-      catLink: {
-        DL: false,
-        link: undefined
-      }
-    }, undefined, undefined);
+	@Input() model: Ranking = new Ranking(undefined, undefined, new Date(), false, false, {cat: undefined, rank: undefined, catLink: {link: undefined, DL: false}}, undefined, undefined);
 
-
-  ; 
 	info: boolean;
 
 

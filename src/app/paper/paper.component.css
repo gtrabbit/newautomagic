@@ -2,9 +2,9 @@
 	text-decoration: line-through;
 }
 
-span{
+span, strong, em{
 	font-size: 10pt;
-
+	font-family: Times
 }
 
 .holder{
@@ -12,7 +12,12 @@ span{
 	border-bottom: dotted silver 2px;
 	align-content: center;
 	justify-content: space-between;
+	vertical-align: center;
+	padding-top: 1%;
 	
+}
+.holder:hover{
+	background-color: rgb(240,240,250);
 }
 
 .buttons{

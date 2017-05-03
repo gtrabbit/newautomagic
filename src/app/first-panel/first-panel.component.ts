@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Article } from '../article';
 import { RankingService } from '../ranking.service';
 import { TopCitedService } from '../top-cited.service';
@@ -10,9 +10,10 @@ import { TopCitedService } from '../top-cited.service';
   styleUrls: ['./first-panel.component.css'],
   providers: [ TopCitedService ]
 })
-export class FirstPanelComponent implements OnInit, OnChanges {
+export class FirstPanelComponent implements OnInit {
 	
 	@Input() public data;
+  public panelTitle: string = "Confirm Paper List"
   public included: Article[] = [];
   public paperList: Article[] = [];
   public journalList: string[] = [];
@@ -20,7 +21,7 @@ export class FirstPanelComponent implements OnInit, OnChanges {
   public totalNumber: number = 0;
   public removed: string[];
   public editShow: boolean[] = [];
-  public rankings: Array<any> = [];
+  public rankings: any;
   public toggleRankPanel: boolean = false;
   public pbf: Object = {};
   public name: string = "Client";
@@ -62,11 +63,60 @@ export class FirstPanelComponent implements OnInit, OnChanges {
         this.TCS.getPBF()
           .subscribe(
           body => this.pbf = body.json()
-
-        )
+        ) 
+  
   }
 
-  ngOnChanges() {
+  checkDisplayState() {
+     switch (this.displayState) {
+      case 0:
+        this.panelTitle = "Confirm Paper List";
+      break;
+      case 1:
+        this.journalList = [];
+        this.included = [];
+        this.panelTitle = "Confirm Journal List";
+        for (let item of this.paperList){
+          if (!item.exclude){
+            this.included.push(item);
+            }
+          }
+        this.journalList.push(this.included[0].journal)  
+        for (let item in this.included){
+          if (this.journalList.every((a) => {
+            return this.clean(a) !== this.clean(this.included[item].journal)
+          })) {
+            this.journalList.push(this.included[item].journal)
+          }
+
+        }
+
+        break;
+
+        case 2:
+
+          this.panelTitle = "Retrieve Rankings";
+          this.RS.getRanks(this.journalList)
+            .subscribe(
+              body => this.rankings = body.json(),
+              error => console.log(error),
+              () => this.toggleRankPanel = true);
+        
+
+        break;
+
+        case 3:
+          this.panelTitle = "Find Top-cited Articles"
+
+        break;
+      
+      default:
+        // code...
+        break;
+    }
+
+  
+
  
   }
 
@@ -91,8 +141,6 @@ export class FirstPanelComponent implements OnInit, OnChanges {
    
   }
 
-
-
   submitEdit(i, j){
      this.journalList[i] = j;
      this.editShow[i]=false;
@@ -116,55 +164,14 @@ export class FirstPanelComponent implements OnInit, OnChanges {
 
 
   next(){
-    
-    switch (this.displayState) {
-      case 0:
-        this.included = [];
-        for (let item of this.paperList){
-          if (!item.exclude){
-            this.included.push(item);
-            }
-          }
-        this.journalList.push(this.included[0].journal)  
-        for (let item in this.included){
-          if (this.journalList.every((a) => {
-            return this.clean(a) !== this.clean(this.included[item].journal)
-          })) {
-            this.journalList.push(this.included[item].journal)
-          }
-
-        }
-
-        break;
-
-        case 1:
-          this.RS.getRanks(this.journalList)
-            .subscribe(
-              body => this.rankings = body.json(),
-              error => console.log(error),
-              () => this.toggleRankPanel = true);
-
-        break;
-
-        case 2:
-
-        break;
-      
-      default:
-        // code...
-        break;
-    }
-   
     this.displayState++;
-   
+    this.checkDisplayState();
   }
 
   previous(){
     this.displayState--;
+    this.checkDisplayState();
   }
-
-
-
 
 
 }

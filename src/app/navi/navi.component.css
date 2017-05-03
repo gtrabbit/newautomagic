@@ -1,0 +1,51 @@
+nav div{
+	flex-grow: 1;
+	border-bottom-style: solid;
+	font-size: .6em;
+	text-align: center;
+	padding-bottom: 12px;
+	padding-top: 6px;
+	height: 6px;
+
+}
+
+nav div:hover::after{
+	content: "";
+	height: 5px;
+	width: 5px;
+	border: solid white 2px;
+	background-color: silver;
+	border-radius: 50%;
+	display: block;
+	left: 50%;
+	position: relative;
+	top: 2px;	
+}
+
+
+
+nav{
+	display: flex;
+	cursor: pointer;
+}
+
+.selected{
+	color: blue;
+	border-bottom: blue;
+	cursor: default;
+}
+
+
+.selected::after{
+	content: "";
+	height: 5px;
+	width: 5px;
+	border: solid white 2px;
+	background-color: blue!important;
+	border-radius: 50%;
+	display: block;
+	left: 50%;
+	position: relative;
+	top: 2px;
+	
+}

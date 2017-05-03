@@ -10,5 +10,5 @@ import { DeleteEntryService } from './delete-entry.service';
   providers: [ FormatRanksService, RankingService, DeleteEntryService ]
 })
 export class AppComponent {
-  title = 'AutoMagic';
+  title = 'Title';
 }
