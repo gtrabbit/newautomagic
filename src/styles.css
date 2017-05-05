@@ -67,12 +67,15 @@ button:hover{
 	border-bottom-right-radius: 10px;
 }
 
-
+.small-text{
+	font-size: 9pt;
+}
 
 .single-line-input-button{
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
+	flex-wrap: wrap;
 }
 
 .single-line-input-button input{

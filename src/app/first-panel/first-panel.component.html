@@ -1,46 +1,25 @@
-<!-- <nav>
-	<button (click)="previous()" [disabled]="displayState<1">Previous</button>
-<button (click)="next()" [disabled]="displayState>2"> Next </button>
-<button (click)="close()">Finish</button><a href="#" (click)="gotoMC()">To Top-Cited</a>
-</nav> -->
 <app-navi [(state)]="displayState" (stateChange)="checkDisplayState()" ></app-navi>
 <hr>
 <h2 class="title">&emsp;{{panelTitle}}</h2>
 <div class="divider"></div>
 <div [ngSwitch]="displayState">
-
-<div class="first" *ngSwitchCase="0">
-
-
-
-
-
-
-	
-
-
-
-
-
-
-<p class="center-text simple-underline"> {{paperList.length}} papers found: </p>
-
-
-	<div class="papers">
-
-		<app-paper *ngFor = "let item of paperList; let i = index" [(paper)]="paperList[i]" [index]="i">
+	<div class="first" *ngSwitchCase="0">
+		<p class="center-text simple-underline"> {{paperList.length}} papers found: </p>
+		<div class="papers">
+			<p>Sort by Year:</p><button (click)="sort()" >Sort</button>
+			<app-paper *ngFor = "let item of paperList; let i = index" [(paper)]="paperList[i]" [index]="i">
   	
-		</app-paper>
-<p class="exp-text"> This is EVERYTHING listed on the profile, which may include abstracts, theses, etc. Compare this list with the client's CV and remove items as appropriate. (We only want rankings for journals where the client has published full-length articles). Use the form below to add published/accepted papers that do not appear here. Click "next" when complete:</p>
-	</div>
-	<h4>Add Paper: </h4>
-<app-add-paper [(paperList)]="paperList" [mode]="true"></app-add-paper>
+			</app-paper>
+			<p class="exp-text"> This is EVERYTHING listed on the profile, which may include abstracts, theses, etc. Compare this list with the client's CV and remove items as appropriate. (We only want rankings for journals where the client has published full-length articles). Use the form below to add published/accepted papers that do not appear here. Click "next" when complete:</p>
+		</div>
+		<h4>Add Paper: </h4>
+		<app-add-paper [(paperList)]="paperList" [mode]="true"></app-add-paper>
 	</div>
 	<div class="papers" *ngSwitchCase="1">
-	<p class="center-text simple-underline"> including {{included.length}} papers: </p>
-	<hr>
+		<p class="center-text simple-underline"> including {{included.length}} papers: </p>
+		<hr>
 
-			<h5>Search for these:</h5>
+		<h5>Search for these:</h5>
 		<ul class="journalList-holder">
 			<li *ngFor = "let item of journalList; let i = index" >
 				<span>{{item}}</span>
@@ -59,7 +38,7 @@
 
 		</ul>
 
-			<h5>Don't search for these:</h5>
+		<h5>Don't search for these:</h5>
 		<ul class="journalList-holder">
 			<li *ngFor = "let item of removed; let i = index">
 				{{item}}
@@ -94,10 +73,16 @@
 		<app-top-cited [field]="fieldList[fsel.selectedIndex]" [pbf]="pbf" [paperList]="paperList" [name]="name"></app-top-cited>
 
 	</div>
+	<div *ngSwitchCase="4" >
+		<app-exhibit-index-builder [paperList]="paperList"></app-exhibit-index-builder>
+	</div>
+
+
+</div>
 
 
 
 <hr>
 <button (click)="previous()" [disabled]="displayState<1">Previous</button>
-<button (click)="next()" [disabled]="displayState>2"> Next </button>
+<button (click)="next()" [disabled]="displayState>3 || paperList.length===0"> Next </button>
 <button (click)="close()">Finish</button>

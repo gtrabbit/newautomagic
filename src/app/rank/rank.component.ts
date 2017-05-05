@@ -24,12 +24,15 @@ export class RankComponent implements OnInit {
   constructor(private FRS: FormatRanksService) { }
 
   ngOnInit() {
+    console.log("unRanked is ", this.unRanked);
     for (let i = 0; i<this.rankings.rankedJournals.length; i++){
       if (this.rankings.rankedJournals[i].noRank){
         this.unRanked.push(this.rankings.rankedJournals.splice(i, 1));
         i--;
+        console.log(this.rankings.rankedJournals);
       }
     }
+    console.log(this.rankings);
    }
 
   addRank(e){

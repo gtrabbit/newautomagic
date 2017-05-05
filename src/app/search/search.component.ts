@@ -50,6 +50,7 @@ export class SearchComponent implements OnInit {
           this.journal = results.rankedJournals[0].journalName;
           this.acquireLinks()
           this.displayLinks(this.results);
+      
         } else {
           this.journal = journal;
         }
@@ -68,12 +69,15 @@ export class SearchComponent implements OnInit {
   }
 
   delete(results){
-    this.DES.delete(results).subscribe(
+    if (window.confirm("For Serious Delete This --Forever?")){
+      this.DES.delete(results).subscribe(
       body => {
         console.log(body.json())
         this.searchHappened = !this.searchHappened
       }
       )
+    }
+    
 
 
   }

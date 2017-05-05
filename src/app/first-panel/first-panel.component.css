@@ -42,6 +42,10 @@ p {
 
 .journalList-holder li span{
 	flex-grow: 5;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 50%;
+	text-overflow: ellipsis;
 
 }
 

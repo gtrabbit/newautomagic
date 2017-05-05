@@ -18,7 +18,7 @@ export class NaviComponent implements OnInit{
   }
 
   navigate(i){
-  	this.stateChange.emit(i);
+      this.stateChange.emit(i);  	
   }
 
 

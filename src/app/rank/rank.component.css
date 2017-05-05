@@ -4,6 +4,11 @@ app-display-ranking{
 
 }
 
+app-edit-journal{
+	width: 100%;
+	margin-left: 5px;
+}
+
 .holder{
 	border: solid black 1px;
 }

@@ -12,7 +12,9 @@ button{
 
 .journalList-holder{
 	display: block;
-	width: 500px;
+	width: 95%;
+	padding-left: 15px;
+
 }
 
 .journalList-holder li{
@@ -32,8 +34,12 @@ button{
 	align-self: self-end;
 }
 
-.journalList-holder li span{
+.journalList-holder li em{
 	flex-grow: 5;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 50%;
 
 }
 

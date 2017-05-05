@@ -1,12 +1,23 @@
 <h2 class="main-title title">Scan Profile</h2>
 
 <form id="form2" class="single-line-input-button">
+
 	<label for="profileInput" >GS Profile:</label>
 	<input type="text" name="profile" #profileInput required> 
 	
-	<button (click)="scan(profileInput.value)" id="magicButton">Magic</button>
-
+	<button (click)="scan(profileInput.value, proxy.selected)" id="magicButton">Magic</button>
+	<div>
+	<label for="proxy"> Proxy: </label>
+	<select #proxy>
+		<option selected> http://scholar.hipr.com/ </option>
+		<option> http://s2.hipr.com/ </option>
+	</select>
+	</div>
 </form>
+<p class="small-text">{{errormsg}}</p>
+<hr>
+<label for=""> Start from Scratch? </label>
+<button (click)="scratch()" >Mundane</button>
 
 <div class="panelHolder"  *ngIf="toggle">
 	<app-first-panel [data]="data" (closing)="toggleShow($event)"></app-first-panel>

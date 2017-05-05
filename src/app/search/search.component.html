@@ -15,6 +15,9 @@
 	numbers: displays.numbers[i]
 	}"
 	> </app-display-links>
+	<div *ngIf="results.rankedJournals.length">
+		<a target="_blank" href="{{results.rankedJournals[0].IFLink}}" *ngIf="results.rankedJournals[0].IFLink"> {{results.rankedJournals[0].journalName}} </a>
+	</div>
 	
 
 </div>

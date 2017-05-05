@@ -16,6 +16,7 @@ export class ProfileSearchComponent implements OnInit {
   public paperList: Article[];
   public journalList: string[];
   public data: Object;
+  errormsg: string = "";
 
 
 
@@ -37,14 +38,32 @@ export class ProfileSearchComponent implements OnInit {
 
 
 
-  scan(website: string){
-    if (website.length){
-       this.scanService.getPaperList(website)
+  scan(website: string, proxy){
+
+   if (website.search(/citations\?.*user=/gi) !== -1){
+    website.replace(/.*(?=citations\?user=)/gi, proxy);
+    this.errormsg = "";
+    this.scanService.getPaperList(website)
             .subscribe(
-              body => this.data = body.json(),
+              body => {
+                let response = body.json();
+                if (response.hasOwnProperty("err")){
+                  this.errormsg = response.err;
+                  console.log(response.err)
+                } else {
+                  this.data = body.json();
+                  this.toggleShow(true);
+                }
+              },
               error => console.log(error),
-              () => this.toggleShow(true));
-    }
+              );
+   } else {
+     this.errormsg = "Please enter a valid Google Scholar profile"
+
+   }
+
+
+ 
    
    		
   }
@@ -53,4 +72,10 @@ export class ProfileSearchComponent implements OnInit {
   log(){
   	console.log(this.data);
   }
+
+  scratch(){
+    this.data = {};
+    this.toggleShow(true)
+  }
+
 }

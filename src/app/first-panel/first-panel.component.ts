@@ -26,6 +26,7 @@ export class FirstPanelComponent implements OnInit {
   public pbf: Object = {};
   public name: string = "Client";
   @Output() public closing = new EventEmitter();
+  sortToggle = false;
 
 
   public fieldList = ["Agricultural Science", 
@@ -67,7 +68,40 @@ export class FirstPanelComponent implements OnInit {
   
   }
 
+  sort(){
+    this.sortToggle = !this.sortToggle;
+    if (this.sortToggle){
+        this.paperList.sort(function(a, b){
+      if (a.year < b.year){
+        return -1;
+      } else if (a.year > b.year){
+        return 1;
+      } else {
+        return 0;
+      }
+
+    })
+      } else {
+          this.paperList.sort(function(b, a){
+      if (a.year < b.year){
+        return -1;
+      } else if (a.year > b.year){
+        return 1;
+      } else {
+        return 0;
+      }
+
+    })
+      }
+
+
+  
+  }
+
   checkDisplayState() {
+     if (this.paperList.length === 0){
+          this.displayState = 0;
+        }
      switch (this.displayState) {
       case 0:
         this.panelTitle = "Confirm Paper List";
@@ -108,6 +142,10 @@ export class FirstPanelComponent implements OnInit {
         case 3:
           this.panelTitle = "Find Top-cited Articles"
 
+        break;
+
+        case 4:
+          this.panelTitle = "Exhibit Index Builder"
         break;
       
       default:
