@@ -114,7 +114,7 @@ app.post("/getpaperlist", function(req, res){
 
 
    let cb = function (paperList){
-    console.log(paperList);
+
      res.send(paperList);
   }
   

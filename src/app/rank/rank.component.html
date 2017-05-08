@@ -4,13 +4,15 @@
 
 </h5>
 	<ul *ngIf="unRanked.length">
-		<li  *ngFor = "let item of unRanked">
+		<li  *ngFor = "let item of unRanked; let i=index">
 			{{item[0].journalName}}
+			<span class="am-ende">Be this in err? <button (click)="openEdit(i)">For sooth</button></span>
 		</li>
 
 	</ul>
-
-
+<div *ngIf="displayEdit">
+<app-add-if  [model]="editJournal" ></app-add-if> <button (click)="displayEditToggle()" >Close</button>
+</div>
 
 
 <h5> No Match for these. Try searching with different names. Otherwise, clink the button to confirm that this journal is not ranked high enough and we will disregard it in future searches. </h5>

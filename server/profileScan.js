@@ -13,7 +13,7 @@ const buildPaperList = function (body){
     
   init2.forEach(function(a){
     let b = a.slice(27, a.length-5);
-    b = b.match(/([,:a-zA-Z&-]\s*)+(?=\s\d*|\W*)/)[0].trim();
+    b = b.match(/(([,:a-zA-Z&-\./]\s*)|((\d+(?=(th)|(st)|(rd)|(nd))))|(\d{4}\s))*(?!\d)/)[0].trim();
     if (b.slice(-1) === ","){
         b = b.slice(0, b.length-1);
       }  
@@ -67,7 +67,7 @@ const scrapeProfile = function (website, cb){
       if (err){
         cb({err: err})
       }
-      console.log("the entire thing: ", body);
+  
     body = body.match(/<body>.+<\/body/g)[0];
     body = body.replace(/&#8211;/g, "--");
     body = body.replace(/&#8208;/g, "-");

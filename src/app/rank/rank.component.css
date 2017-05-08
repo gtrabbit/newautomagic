@@ -12,3 +12,7 @@ app-edit-journal{
 .holder{
 	border: solid black 1px;
 }
+
+.am-ende{
+	float: right;
+}

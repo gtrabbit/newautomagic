@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormatRanksService} from '../format-ranks.service';
+import { Ranking } from "../ranking";
 
 @Component({
   selector: 'app-rank',
@@ -14,25 +15,25 @@ export class RankComponent implements OnInit {
 		};
 
 	public showRankToggle: boolean = false;
-  public unRanked: Array<string> = [];
+  public unRanked: Array<Ranking> = [];
   gsRankCats: Array<string> = [];
   gsRankLinks: Array<string> = [];
   gsRankNumbers: Array<number[]> = [];
+  editJournal: Ranking;
+  displayEdit = false;
  
 
 
   constructor(private FRS: FormatRanksService) { }
 
   ngOnInit() {
-    console.log("unRanked is ", this.unRanked);
     for (let i = 0; i<this.rankings.rankedJournals.length; i++){
       if (this.rankings.rankedJournals[i].noRank){
         this.unRanked.push(this.rankings.rankedJournals.splice(i, 1));
         i--;
-        console.log(this.rankings.rankedJournals);
       }
     }
-    console.log(this.rankings);
+    
    }
 
   addRank(e){
@@ -73,8 +74,16 @@ export class RankComponent implements OnInit {
      } 
   }
 
-  
+  displayEditToggle(){
+    this.displayEdit = !this.displayEdit;
+  }
+openEdit(i){
+  this.displayEdit = false;
+  this.editJournal = this.unRanked[i][0];
+  console.log(this.editJournal);
+  this.displayEdit = true;
 
+}
 
 
 

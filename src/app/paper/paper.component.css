@@ -21,7 +21,7 @@ span, strong, em{
 }
 
 .buttons{
-	
+	width: 60px;
 	display: flex;
 	flex-direction: column;
 }

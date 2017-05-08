@@ -5,12 +5,11 @@
 	<label for="profileInput" >GS Profile:</label>
 	<input type="text" name="profile" #profileInput required> 
 	
-	<button (click)="scan(profileInput.value, proxy.selected)" id="magicButton">Magic</button>
+	<button (click)="scan(profileInput.value, proxyList[proxy.selectedIndex])" id="magicButton">Magic</button>
 	<div>
 	<label for="proxy"> Proxy: </label>
 	<select #proxy>
-		<option selected> http://scholar.hipr.com/ </option>
-		<option> http://s2.hipr.com/ </option>
+		<option *ngFor="let proxy of proxyList" >{{proxy}}</option>
 	</select>
 	</div>
 </form>

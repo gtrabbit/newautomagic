@@ -18,6 +18,8 @@ export class ProfileSearchComponent implements OnInit {
   public data: Object;
   errormsg: string = "";
 
+  proxyList = ["http://scholar.hipr.com/", "http://s2.hipr.com/", "https://scholar.google.com"]
+
 
 
 
@@ -39,9 +41,10 @@ export class ProfileSearchComponent implements OnInit {
 
 
   scan(website: string, proxy){
-
+console.log(proxy);
    if (website.search(/citations\?.*user=/gi) !== -1){
-    website.replace(/.*(?=citations\?user=)/gi, proxy);
+    website = website.replace(/.*(?=citations\?user=)/, proxy);
+    console.log(website);
     this.errormsg = "";
     this.scanService.getPaperList(website)
             .subscribe(

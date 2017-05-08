@@ -1,3 +1,15 @@
 *{
 	font-family: Times;
 }
+
+em{
+	cursor: pointer;
+}
+
+em:hover{
+	color: rgb(50,50,150);
+}
+
+.side{
+	float: right;
+}

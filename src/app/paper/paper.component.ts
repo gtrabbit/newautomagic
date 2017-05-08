@@ -13,6 +13,8 @@ export class PaperComponent implements OnInit {
 	@Input() public index: number;
 	public excludeMsg: string = "remove";
   public editing: boolean = false;
+  capsToggle = false;
+  formerTitle: string;
 	
 	public toggleMsg = function (){
   		if (!this.paper.exclude){
@@ -35,6 +37,17 @@ export class PaperComponent implements OnInit {
   	}
 
   
+  }
+
+  titleCase(){
+    if (!this.capsToggle){
+      this.formerTitle = this.paper.title;
+      this.paper.title = this.paper.title[0] + this.paper.title.substr(1).toLowerCase();
+    } else {
+      this.paper.title = this.formerTitle
+    }
+       this.capsToggle = !this.capsToggle;
+    
   }
 
 
