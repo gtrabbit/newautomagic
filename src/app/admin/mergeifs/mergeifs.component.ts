@@ -8,10 +8,8 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./mergeifs.component.css']
 })
 export class MergeifsComponent implements OnInit {
-	confirmation: object = {
-		matches: "",
-		noMatch: []
-	}
+	confirmation = "";
+  newfound = "";
 
   constructor(private http: Http) { }
 
@@ -19,9 +17,14 @@ export class MergeifsComponent implements OnInit {
   }
 
   submit(ifchart){
-    console.log(ifchart);
   	this.http.post('./mergeifs', ifchart).subscribe(
-  		body => this.confirmation = body.json())
+  		body => {
+        this.confirmation = body.json().matches;
+        this.newfound = body.json().noMatch;
+
+      },
+      err => this.confirmation = "Error. Try correcting the formatting."
+      )
 
   }
 
