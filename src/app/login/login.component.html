@@ -1,0 +1,12 @@
+<div *ngIf="!isAdmin">
+<h3>Log in</h3>
+<p>You must be logged in to an administrator account to view this page.</p>
+<form>
+	<label>Username: <input #username type="text" name="userName"> </label>
+	<label> password: <input #password type="password" name="password"> </label>
+	<button (click)="submit(username.value, password.value)" >Submit</button>
+</form>
+<button (click)="close()" > Close </button>
+</div>
+
+<app-admin-panel *ngIf="isAdmin" (closed)="close()" ></app-admin-panel>

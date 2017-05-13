@@ -21,6 +21,12 @@ import { DisplayLinksComponent } from './display-links/display-links.component';
 import { AssociateRankComponent } from './associate-rank/associate-rank.component';
 import { NaviComponent } from './navi/navi.component';
 import { ExhibitIndexBuilderComponent } from './exhibit-index-builder/exhibit-index-builder.component';
+import { PbfComponent } from './admin/pbf/pbf.component';
+import { ScraperComponent } from './admin/scraper/scraper.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { AccountsComponent } from './admin/accounts/accounts.component';
+import { LoginComponent } from './login/login.component';
+import { MergeifsComponent } from './admin/mergeifs/mergeifs.component';
 
 
 @NgModule({
@@ -41,7 +47,13 @@ import { ExhibitIndexBuilderComponent } from './exhibit-index-builder/exhibit-in
     DisplayLinksComponent,
     AssociateRankComponent,
     NaviComponent,
-    ExhibitIndexBuilderComponent
+    ExhibitIndexBuilderComponent,
+    PbfComponent,
+    ScraperComponent,
+    AdminPanelComponent,
+    AccountsComponent,
+    LoginComponent,
+    MergeifsComponent
   ],
   imports: [
     BrowserModule,

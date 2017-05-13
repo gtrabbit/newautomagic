@@ -1,0 +1,18 @@
+.toolHolder{
+	display: flex;
+	flex-wrap: wrap;
+
+}
+
+.toolHolder *{
+	flex-grow: 1;
+	min-width: 45%;
+	border: solid black 1px;
+}
+
+.closeBtn{
+	position: absolute;
+	top: 2px;
+	right: 2px;
+
+}

@@ -2,3 +2,28 @@ nav{
 	background-color: silver;
 	border-bottom: solid black 2px;
 }
+
+nav a{
+	cursor: pointer;
+}
+
+
+
+app-admin-panel, app-login{
+	position: absolute;
+	display: block;
+	width: 92vw;
+	height: 90vw;
+	margin: auto;
+	top: 0px;
+	left: 2vw;
+	background-color: white;
+	border: solid black 2px;
+	border-top: none;
+	z-index: 6;
+	box-shadow: 0px 2px 4px 4px rgb(40,60,80);
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 80px;
+	padding: 1%;
+	overflow-y: scroll;
+}

@@ -1,0 +1,11 @@
+label{
+	width: 90%;
+	display: block;
+
+	margin: auto;
+}
+input[type="text"], input[type="password"]{
+	display: block;
+
+	width: 90%;
+}

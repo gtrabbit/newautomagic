@@ -63,7 +63,10 @@ export class FirstPanelComponent implements OnInit {
       this.removed = [];
         this.TCS.getPBF()
           .subscribe(
-          body => this.pbf = body.json()
+          body => {
+            this.pbf = body.json();
+            console.log(this.pbf);
+          }
         ) 
   
   }

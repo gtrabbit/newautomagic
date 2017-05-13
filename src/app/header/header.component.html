@@ -1,1 +1,3 @@
-<nav> &emsp; header --coming soon-- </nav>
+<nav> &emsp; <a (click)="showAdminPanel()" >Admin </a> </nav>
+
+<app-login *ngIf="accessDenied" (closed)="showAdminPanel()"></app-login>

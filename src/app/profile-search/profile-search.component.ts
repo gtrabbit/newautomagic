@@ -41,10 +41,10 @@ export class ProfileSearchComponent implements OnInit {
 
 
   scan(website: string, proxy){
-console.log(proxy);
+
    if (website.search(/citations\?.*user=/gi) !== -1){
     website = website.replace(/.*(?=citations\?user=)/, proxy);
-    console.log(website);
+
     this.errormsg = "";
     this.scanService.getPaperList(website)
             .subscribe(

@@ -190,14 +190,7 @@ const associate = function(journal, alternate, cb){
   console.log("alternate is", alternate);
   console.log("cleaned verion is ", clean(journal));
  
-/*
-  rank.update(
-    {journalName: alternate},
-    { $addToSet : {search : clean(journal)}}, {runValidators: true}).exec();
-    cb(alternate);
 
-    
-*/
   rank.findOne({search: clean(alternate)}, function(err, result){
     if (err){console.log(err)}
     if (typeof result.search === 'string'){
@@ -249,6 +242,51 @@ const submitnew = function(body, cb){
 }
 
 
+const merge = function(chart, cb){
+  let noMatch = [];
+  let matches = 0;
+  let total = chart.length;
+  console.log(chart)
+  console.log(chart.length)
+  chart.forEach(function(a){
+   
+    rank.find({search: a.search}, function(err, journals){
+      if (err) throw err;
+      if (journals.length){
+        journals[0].IF = a.IF;
+        journals[0].save(function(err){
+          if (err) throw err;
+        })
+        
+        matches++;
+        total--;
+      } else {
+        let makeNew = new rank({
+          journalName: a.journalName,
+          IF: a.IF,
+          search: a.search
+        });
+        makeNew.save(function(err){
+          if (err) {
+            console.log(makeNew);
+            throw err;
+          }
+        })
+        noMatch.push(a);
+        total--;
+      }
+        if (total === 0){
+    cb ({noMatch: noMatch, matches: matches});
+  } 
+    })
+    
+   
+  })
+ 
+}
+
+
+
 exports.module = {
   makeArray: makeArray,
   checkForRanks: checkForRanks,
@@ -257,5 +295,7 @@ exports.module = {
   submitIFL: submitIFL,
   submitnew: submitnew,
   associate: associate,
-  delete: deleteRank
+  delete: deleteRank,
+  rank: rank,
+  merge: merge
 }

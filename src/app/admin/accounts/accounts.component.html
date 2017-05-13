@@ -1,0 +1,23 @@
+<h3>Accounts</h3>
+
+<h4>Create New Account / Edit Accounts</h4>
+
+<form>
+	<label> username: (database searches by this term) <input type="text" name="userName" [(ngModel)]="model.username" > </label>
+	<label> first name: <input [(ngModel)]="model.firstName" type="text" name="firstName"> </label>
+	<label> last name: <input [(ngModel)]="model.lastName"  type="text" name="lastName"> </label>
+	<label> email: <input type="text" name="email" [(ngModel)]="model.email" > </label>
+	<label> password: <input type="password" name="password" [(ngModel)]="model.password" > </label>
+	<label> admin? <input type="checkbox" name="admin" [(ngModel)]="model.admin" > </label>
+	<button type="submit" (click)="submit()" [disabled]="checkValid()"> Submit </button>
+</form>
+<span> &emsp; {{creationMsg}} </span>
+
+<h4>
+	Delete a user
+</h4>
+<form>
+	<label>username: <input type="text" #u name="userName"> </label>
+	<button (click)="delete(u.value)" > Delete </button>
+	<p> {{deleteMsg}} </p>
+</form>

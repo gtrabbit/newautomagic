@@ -1,0 +1,8 @@
+<h3> Update Impact Factors </h3>
+
+<p> The server expects plain text taken from a .csv file containing only impact factors over 4. Please refer to instructions if you need help. The instructions for removing formatting can be applied here. Enter the text below and hit submit.  </p>
+
+<textarea #ifchart name="ifdata" ></textarea>
+<button (click)="submit(ifchart.value)" >Submit</button>
+<p> Matched {{confirmation.matches}} journals </p>
+<p> Found {{confirmation.noMatch}} journals not previous listed </p>

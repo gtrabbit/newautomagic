@@ -67,6 +67,10 @@ const scrapeProfile = function (website, cb){
       if (err){
         cb({err: err})
       }
+
+      if (!body){
+        cb({err: "returned an empty body?"})
+      }
   
     body = body.match(/<body>.+<\/body/g)[0];
     body = body.replace(/&#8211;/g, "--");
