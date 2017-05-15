@@ -22,11 +22,11 @@ const titleCase = function (string){
 }
 
 const createJSON = function (chart){
-let reg = /([\w\s-:&]+),,([\d+\.]+)/g
+let reg = /([\w\s-:&]+)\s\s([\d+\.]+)\s{4}/g
 let JSONIF = [];
 let list = chart.match(reg);
 list.forEach(function(a){
-	let arr = a.split(",,");
+	let arr = a.split("  ");
 	let title = titleCase(arr[0].trim());
   let search = clean(title);
   
