@@ -69,7 +69,7 @@ const extraMagic = function(website, cat, date, count, cb){
 				let location = './tmp/' + uid;
 				fs.mkdir(location, function(){
 					
-					fs.writeFileSync(__dirname + location + "/pldocs.zip", data, 'binary')
+					fs.writeFileSync(__dirname + "/." + location + "/pldocs.zip", data, 'binary')
 
 					cb({msg: location})
 				})
