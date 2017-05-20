@@ -38,6 +38,8 @@
 		<p *ngFor="let item of rankings.rankedJournals let i = index" > <app-display-ranking  [results]="rankings.rankedJournals[i]" [journal]="item.journalName" > </app-display-ranking> 
 		</p>
 <hr>
+<button (click)="readyDL()" > Get PDFs? </button>
+
 		<p *ngFor="let item of rankings.rankedJournals let i = index" >
 		<span *ngIf="!rankings.rankedJournals[i].IFLink"> Submit IF for: {{rankings.rankedJournals[i].journalName}} 
 		<app-add-iflink [journal]="rankings.rankedJournals[i]"></app-add-iflink> </span> 

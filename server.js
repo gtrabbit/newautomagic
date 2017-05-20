@@ -9,6 +9,7 @@ const makePBFChart = require('./server/makePBFChart');
 const mongoose = require('mongoose');
 const users = require('./server/users');
 const merge = require('./server/mergeIF');
+const makePDFtest = require('./server/makePDFtest');
 
 mongoose.Promise = require('bluebird');
 
@@ -30,6 +31,31 @@ app.get("/", function(req, res){
  res.sendFile(path.join(__dirname+'/dist/index.html'))
 
 })
+
+app.post('/getpdfs', function(req, res){
+  const cb = function(data){
+    res.send(data);
+  }
+
+  app.get('/tmp/:uid', function(req, res){
+    let uid = req.params.uid;
+    res.download(__dirname+'/tmp/' + uid + '/pldocs.zip')
+  })
+
+
+  let body = [];
+    req.on('data', function(chunk) {
+      body.push(chunk);
+        }).on('end', function() {
+            body = Buffer.concat(body).toString();
+            if (body) {
+              body = JSON.parse(body)
+              console.log(body);
+              makePDFtest.module.makePDF(body, cb);
+            } 
+        });
+})
+
 
 app.post('/admin/updatepbf', function(req, res){
   

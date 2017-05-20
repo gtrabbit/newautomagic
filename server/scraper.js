@@ -4,6 +4,8 @@ const Schema = mongoose.Schema;
 mongoose.Promise = require('bluebird');
 const tinyreq = require('tinyreq');
 const rank = require('./rankingDB').module.rank;
+const pdf = require('html-pdf');
+const fs = require('fs');
 
 
 // the meat, so to speak
@@ -11,6 +13,7 @@ const rank = require('./rankingDB').module.rank;
 let erroredPages = [];
 
 const scrapeRanks = function(body, link){
+
  // console.log("this has been called");
   const topReg = /<td class="gs_title">(.*?)<\/td>/g;
   const cNReg = /Top publications - (.*?)(?=<\/h3)/;
@@ -68,7 +71,7 @@ const checkDups = function (a, cat){
 
 const clean = function (a){
  
-  a = a.toLowerCase().replace(/\s(and|&)\s/g, " ").replace(/[^\s\w]/g, " ").replace(/\s+/g, " ").trim();
+  a = a.toLowerCase().replace(/\s(and|&|of|the|in|on)\s/g, " ").replace(/[^\s\w]/g, " ").replace(/\s+/g, " ").trim();
   return (a);
 }
 
@@ -142,11 +145,10 @@ const submitRanks = function (ranks, link){
 
 
 
-
-
 const scrape = function (website, cb){
   let totalPagesSearched = 0;
   let linksLooked = 0;
+
 
     
  
@@ -159,11 +161,14 @@ const scrape = function (website, cb){
                 return;
               }
               totalPagesSearched++;
+              
+              makePDF(body, website);
             //this scans the page and submits rankings for top 10 on each
               scrapeRanks(body, website);
               linksLooked++;
             //gets all sub categories from the page
             let links = findLinks(body)
+
             linksLooked += links.length;
 
             links.forEach(function(a, i, array){
@@ -181,6 +186,7 @@ const scrape = function (website, cb){
                     //this scans the page and submits rankings for top 10 on each
                     scrapeRanks(body, array[i]);
                     let links = findLinks(body);
+                 
                     linksLooked += links.length;
                     links.forEach(function(a, i, array){
                       (function(i){

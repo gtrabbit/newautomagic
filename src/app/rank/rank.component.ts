@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormatRanksService} from '../format-ranks.service';
 import { Ranking } from "../ranking";
+import { GetpdfsService } from '../getpdfs.service'
 
 @Component({
   selector: 'app-rank',
@@ -13,7 +14,6 @@ export class RankComponent implements OnInit {
 		rankedJournals: [],
 		noMatch: []
 		};
-
 	public showRankToggle: boolean = false;
   public unRanked: Array<Ranking> = [];
   gsRankCats: Array<string> = [];
@@ -24,9 +24,11 @@ export class RankComponent implements OnInit {
  
 
 
-  constructor(private FRS: FormatRanksService) { }
+  constructor(private FRS: FormatRanksService, private GPS: GetpdfsService) { }
 
   ngOnInit() {
+   
+
     for (let i = 0; i<this.rankings.rankedJournals.length; i++){
       if (this.rankings.rankedJournals[i].noRank){
         this.unRanked.push(this.rankings.rankedJournals.splice(i, 1));
@@ -40,12 +42,25 @@ export class RankComponent implements OnInit {
     this.rankings.rankedJournals.push(e);
   }
 
+
+
   showRanks(){
     if (!this.showRankToggle){
       this.acquireLinks();
     }
     
   	this.showRankToggle = !this.showRankToggle;
+    
+  }
+
+  readyDL(){
+    let data = this.makeDataObject();
+    this.GPS.getpdfs(data).subscribe(
+      body => {
+        let uid = body.json().msg;       
+        window.open(uid, "_blank");
+      });
+   
     
   }
 
@@ -71,7 +86,8 @@ export class RankComponent implements OnInit {
          })
         
       }
-     } 
+     }
+
   }
 
   displayEditToggle(){
@@ -83,6 +99,19 @@ openEdit(i){
   console.log(this.editJournal);
   this.displayEdit = true;
 
+}
+
+makeDataObject(){
+  let data = {data: []}
+  for (let i in this.gsRankCats){
+    let thing = {
+      url: this.gsRankLinks[i],
+      cat: this.gsRankCats[i],
+      numbers: this.gsRankNumbers[i]
+    }
+    data.data.push(thing);
+  }
+  return data;
 }
 
 

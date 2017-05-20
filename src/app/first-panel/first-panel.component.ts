@@ -65,7 +65,7 @@ export class FirstPanelComponent implements OnInit {
           .subscribe(
           body => {
             this.pbf = body.json();
-            console.log(this.pbf);
+        
           }
         ) 
   

@@ -65,11 +65,13 @@ const scrapeProfile = function (website, cb){
     data_endcoding: "UTF-8"
   }, function(err, body){
       if (err){
-        cb({err: err})
+        cb({err: err});
+        return;
       }
 
       if (!body){
         cb({err: "returned an empty body?"})
+        return;
       }
   
     body = body.match(/<body>.+<\/body/g)[0];
@@ -83,7 +85,7 @@ const scrapeProfile = function (website, cb){
     } else {
       console.log(body);
       console.log("I think this might result in a captcha")
-      cb({err: "looks like Google blocked the search, or you entered the URL incorrectly"});
+      cb({err: "looks like Google blocked the search, or you entered the URL incorrectly. Try changing your choice of proxy."});
     }
 
 
