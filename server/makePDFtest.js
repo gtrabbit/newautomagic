@@ -44,11 +44,11 @@ const extraMagic = function(website, cat, date, cb){
 		let options = {
 			"header": {
 				"height": "10mm",
-				"contents": "<span style='position: absolute; font-size 15px'>" + date + "</span> <p style='text-align: center'> " + catDisplay + "</p>"
+				"contents": "<span style='position: absolute; font-size 12px'>" + date + "</span> <p style='text-align: center'> " + catDisplay + "</p>"
 			},
 			"footer":{
 				"height": "10mm",
-				"contents": "<span style='font-size: 15px'>" + cat.url + "</span>"
+				"contents": "<span style='font-size: 10px; overflow: hidden'>" + cat.url + "</span>"
 			},
 			"format": "Letter",
 			"border": {
