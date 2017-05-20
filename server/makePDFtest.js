@@ -3,13 +3,13 @@ const zip = new require('node-zip')();
 const fs = require('fs');
 var pdf = require('html-pdf');
 
-
+let count;
 
 	
 const doAllTheMagic = function(data, cb){
 	let date = new Date();
     let dateDisplay = "" + date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear();
-	let count = data.data.length;
+	count = data.data.length;
 	pdfArr = [];
 
 
@@ -28,8 +28,8 @@ const doAllTheMagic = function(data, cb){
 				console.log("an error with tinyreq?")
 				return console.log(err)
 			}
-			count--;
-			extraMagic(body, a, dateDisplay, count, cb);
+			
+			extraMagic(body, a, dateDisplay, cb);
 			
 
 		})
@@ -38,7 +38,7 @@ const doAllTheMagic = function(data, cb){
 
 
 
-const extraMagic = function(website, cat, date, count, cb){
+const extraMagic = function(website, cat, date, cb){
   		let catDisplay = cat.cat + " - Google Scholar Metrics";
   	
 		let options = {
@@ -59,7 +59,7 @@ const extraMagic = function(website, cat, date, count, cb){
 		pdf.create(website, options).toBuffer(function(err, buffer){
 			if (err) return console.log(err);
 			pdfArr.push({buffer: buffer, name: options.name});
-		
+			count--;
 			if (count < 1){
 				let data;
 				pdfArr.forEach(function(a, i){
