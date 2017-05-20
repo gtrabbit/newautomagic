@@ -67,8 +67,16 @@ const extraMagic = function(website, cat, date, count, cb){
 				})
 				let uid = Math.random().toString().substr(2, 7);
 				let location = './tmp/' + uid;
+				console.log(location);
+				if (fs.existsSync('./tmp')){
+					console.log("./tmp exists")
+				} else {
+					fs.mkdirSync('./tmp')
+				}
 				fs.mkdir(location, function(){
-					
+					if (fs.existsSync(location)){
+					console.log(location, "exists")
+				}
 					fs.writeFileSync(location + "/pldocs.zip", data, 'binary')
 
 					cb({msg: location})
