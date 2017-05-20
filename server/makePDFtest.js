@@ -50,6 +50,9 @@ const extraMagic = function(website, cat, date, count, cb){
 				"height": "10mm",
 				"contents": "<span>" + cat.url + "</span>"
 			},
+			"format": "A4",
+			"border": "25px",
+			"zoomFactor": "0.7",
 			"name": "GS_" + cat.cat +"_" + cat.numbers.sort().join(", ")
 		}
 
@@ -75,7 +78,7 @@ const extraMagic = function(website, cat, date, count, cb){
 				}
 				fs.mkdir(location, function(){
 					if (fs.existsSync(location)){
-					console.log(location, "exists")
+		
 				}
 					fs.writeFileSync(location + "/pldocs.zip", data, 'binary')
 
