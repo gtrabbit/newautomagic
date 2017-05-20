@@ -7,8 +7,8 @@ export class AddRankService {
 
   constructor(private http: Http) { }
 
-  submitRank(sub): Observable<Response>{
-  	return this.http.post('./submitrank', sub)
+  submitRank(sub, overwrite): Observable<Response>{
+  	return this.http.post('./submitrank', {sub: sub, ow: overwrite})
 
 
 

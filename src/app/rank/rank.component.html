@@ -38,7 +38,7 @@
 		<p *ngFor="let item of rankings.rankedJournals let i = index" > <app-display-ranking  [results]="rankings.rankedJournals[i]" [journal]="item.journalName" > </app-display-ranking> 
 		</p>
 <hr>
-<button (click)="readyDL()" > Get PDFs? </button>
+<button (click)="readyDL()" >  --Download PDFs-- </button> <p>(This works only for GS ranks. You will need to gather PDFs for Impact Factors manually)</p>
 
 		<p *ngFor="let item of rankings.rankedJournals let i = index" >
 		<span *ngIf="!rankings.rankedJournals[i].IFLink"> Submit IF for: {{rankings.rankedJournals[i].journalName}} 
@@ -48,7 +48,7 @@
 
 	</div>
 
-<p>Visit each link and save the pdf, using numbers below to signal to package team. For now, this is the fastest route.</p>
+<p>If the DL button above did not work, you may use these links to gather the PDFs manually.</p>
 
 <app-display-links *ngFor="let item of gsRankCats; let i=index" [display]="{
 	link: gsRankLinks[i],
@@ -56,10 +56,10 @@
 	numbers: gsRankNumbers[i]}"> </app-display-links>
 
 
-	
-		<span *ngFor = "let item of rankings.rankedJournals; let i = index">
+	<p>Known Impact Factor Links:</p>
+		<p *ngFor = "let item of rankings.rankedJournals; let i = index">
 			<a *ngIf="rankings.rankedJournals[i].IFLink" href="{{rankings.rankedJournals[i].IFLink}}" target="_blank">-- {{rankings.rankedJournals[i].journalName}} --</a>
-		</span>
+		</p>
 		
 	
 	

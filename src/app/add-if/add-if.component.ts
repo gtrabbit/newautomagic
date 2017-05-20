@@ -11,9 +11,10 @@ export class AddIFComponent implements OnInit {
 
   response: string;
   showResponse: Boolean = false;
-	@Input() model: Ranking = new Ranking(undefined, undefined, new Date(), false, false, {cat: undefined, rank: undefined, catLink: {link: undefined, DL: false}}, undefined, undefined);
+	@Input() model: Ranking = new Ranking(undefined, undefined, new Date(), false, false, [{cat: undefined, rank: undefined, catLink: {link: undefined, DL: false}}], undefined, undefined);
 
 	info: boolean;
+  overwrite: boolean;
 
 
 	
@@ -23,6 +24,10 @@ export class AddIFComponent implements OnInit {
 
   ngOnInit() {
   	
+    }
+
+    changeGS(i){
+      this.model.GSRank[i].cat = "Baloney Sandwich"
     }
 
 
@@ -73,7 +78,7 @@ export class AddIFComponent implements OnInit {
     this.model.GSRank = this.compileGSRanks();
     this.model.complete = true;
     this.model.updated = new Date();
-    this.ARS.submitRank(this.model).subscribe(
+    this.ARS.submitRank(this.model, this.overwrite).subscribe(
       body => {
         this.showResponse = true;
         this.response = body.json().msg.slice(0, 7);

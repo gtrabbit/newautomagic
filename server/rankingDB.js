@@ -123,7 +123,8 @@ const makeNewJournalRanking = function(journal, cb){
   })
 }
 
-const updateJournal = function(journal, newInfo, cb){
+const updateJournal = function(journal, newInfo, ow, cb){
+ 
   let message = "success for ";
   let props = Object.keys(newInfo);
   props.forEach(function(a){
@@ -134,7 +135,7 @@ const updateJournal = function(journal, newInfo, cb){
     //another safeguard
     if (!(a === null || a === undefined)){
  //special case for dealing with GS ranks
-    if (a === "GSRank"){
+    if (a === "GSRank" && !ow){
       let newCats = [];
       newInfo.GSRank.forEach(function(a){
         if (a.cat !== undefined){
@@ -159,7 +160,7 @@ const updateJournal = function(journal, newInfo, cb){
     } else {
      //yet another safeguard against unintentionally sending
      //empty data
-      if (newInfo[a]){
+      if (newInfo[a] || a === "GSRank"){
         journal[a] = newInfo[a];
       }
     }  
@@ -186,9 +187,7 @@ const updateJournal = function(journal, newInfo, cb){
 }
 
 const associate = function(journal, alternate, cb){
-  console.log(journal)
-  console.log("alternate is", alternate);
-  console.log("cleaned verion is ", clean(journal));
+
  
 
   rank.findOne({search: clean(alternate)}, function(err, result){
@@ -229,16 +228,14 @@ const submitnew = function(body, cb){
   const callBack2 = function(message){
     cb(message);
   }
-
   const callBack = function (results){
     if (results.noMatch.length){
-      makeNewJournalRanking(body, callBack2)
+      makeNewJournalRanking(body.sub, callBack2)
     } else {
-      updateJournal(results.rankedJournals[0], body, callBack2)
+      updateJournal(results.rankedJournals[0], body.sub, body.ow, callBack2)
     }
-
   }
-  checkForRanks([body.journalName], callBack);
+  checkForRanks([body.sub.journalName], callBack);
 }
 
 

@@ -26,6 +26,10 @@ button:hover{
 	box-shadow: none;
 }
 
+.simple-border{
+	border: solid black 1px;
+}
+
 .warn{
 	background-color: rgb(240,200,180);
 }

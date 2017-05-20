@@ -13,14 +13,17 @@ export class FormatRanksService {
 //formatted is a string to be displayed; the other info is 
 //useful for generating the links and numbers to suffix files
     extractCats(ranking){
-     let journalName = ranking.journalName;
-     let gsRankNumbers = [];
-     let gsRankCats = [];
-     let gsRankLinks = [];
-     let formattedRanks = [];
-     let IF;
-     if (ranking.hasOwnProperty('IF')){
-       IF = ranking.IF;
+      let journalName = ranking.journalName;
+      let gsRankNumbers = [];
+      let gsRankCats = [];
+      let gsRankLinks = [];
+      let formattedRanks = [];
+      let IF;
+      if (ranking.hasOwnProperty('IF')){
+        IF = ranking.IF.toString();
+        let start = IF.substr(IF.indexOf(".")+1);
+        let sub = "000".substr(start.length);
+        IF = IF + sub;
      } 
      
      if (ranking.hasOwnProperty("GSRank")){
@@ -28,6 +31,9 @@ export class FormatRanksService {
           let jGSCats = [];
           ranking.GSRank.forEach((a) => {
             jGSRanks.push(a.rank);
+            if (a.cat === "English"){
+              a.cat = "all English journals"
+            }
             jGSCats.push(a.cat);
             if (!gsRankCats.includes(a.cat)){
               gsRankCats.push(a.cat);

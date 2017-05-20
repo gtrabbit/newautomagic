@@ -27,6 +27,7 @@ import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AccountsComponent } from './admin/accounts/accounts.component';
 import { LoginComponent } from './login/login.component';
 import { MergeifsComponent } from './admin/mergeifs/mergeifs.component';
+import { PaperExhibitComponent } from './exhibit-index-builder/paper-exhibit/paper-exhibit.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { MergeifsComponent } from './admin/mergeifs/mergeifs.component';
     AdminPanelComponent,
     AccountsComponent,
     LoginComponent,
-    MergeifsComponent
+    MergeifsComponent,
+    PaperExhibitComponent
   ],
   imports: [
     BrowserModule,

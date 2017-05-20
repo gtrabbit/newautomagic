@@ -20,7 +20,9 @@ export class Ranking {
 		){
 		this.GSRank = [];
 		this.journalName = journalName;
-		this.GSRank.push(GSRank);
+		for (let rank of GSRank){
+			this.GSRank.push(rank);
+		}
 		this.IF = IF;
 		this.search = search;
 		this.updated = updated;
