@@ -44,15 +44,20 @@ const extraMagic = function(website, cat, date, cb){
 		let options = {
 			"header": {
 				"height": "10mm",
-				"contents": "<span style='position: absolute'>" + date + "</span> <p style='text-align: center'> " + catDisplay + "</p>"
+				"contents": "<span style='position: absolute; font-size 15px'>" + date + "</span> <p style='text-align: center'> " + catDisplay + "</p>"
 			},
 			"footer":{
 				"height": "10mm",
-				"contents": "<span>" + cat.url + "</span>"
+				"contents": "<span style='font-size: 15px'>" + cat.url + "</span>"
 			},
-			"format": "A4",
-			"border": "25px",
-			"zoomFactor": "0.7",
+			"format": "Letter",
+			"border": {
+				"top": "0px",
+				"bottom": "0px",
+				"right": "25px",
+				"left": "25px"
+			},
+			"zoomFactor": "0.6",
 			"name": "GS_" + cat.cat +"_" + cat.numbers.sort().join(", ")
 		}
 
