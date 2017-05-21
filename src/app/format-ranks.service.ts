@@ -19,7 +19,7 @@ export class FormatRanksService {
       let gsRankLinks = [];
       let formattedRanks = [];
       let IF;
-      if (ranking.hasOwnProperty('IF')){
+      if (ranking.hasOwnProperty('IF') && ranking.IF){
         IF = ranking.IF.toString();
         let start = IF.substr(IF.indexOf(".")+1);
         let sub = "000".substr(start.length);

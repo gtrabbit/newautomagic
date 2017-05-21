@@ -42,7 +42,7 @@ export class RankComponent implements OnInit {
     this.rankings.rankedJournals.push(e);
   }
 
-
+ 
 
   showRanks(){
     if (!this.showRankToggle){

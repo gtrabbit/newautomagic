@@ -35,7 +35,7 @@
 </p>
 
 	<div class="holder">
-		<p *ngFor="let item of rankings.rankedJournals let i = index" > <app-display-ranking  [results]="rankings.rankedJournals[i]" [journal]="item.journalName" > </app-display-ranking> 
+		<p *ngFor="let item of rankings.rankedJournals let i = index" > <app-display-ranking [results]="rankings.rankedJournals[i]" [journal]="item.journalName" > </app-display-ranking> 
 		</p>
 <hr>
 <button (click)="readyDL()" >  --Download PDFs-- </button> <p>(This works only for GS ranks. You will need to gather PDFs for Impact Factors manually)</p>
