@@ -295,6 +295,11 @@ app.post("/getranks", function(req, res){
 });
 
 
+const temporary = function(){
+  return ranks.module.tempUpdate()
+}
+
+
 var listener = app.listen(process.env.PORT || 8080);
 
 

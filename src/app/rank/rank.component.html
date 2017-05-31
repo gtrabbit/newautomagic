@@ -1,6 +1,6 @@
 
 <h5>
-	The following journals have been marked as not having any rankings up to our standards. If you feel any of these are in error, you can edit them. When I make a button for it.
+	The following journals have been marked as not having any rankings up to our standards. If you feel any of these are in error, you can edit them.
 
 </h5>
 	<ul *ngIf="unRanked.length">
@@ -14,8 +14,8 @@
 <app-add-if  [model]="editJournal" ></app-add-if> <button (click)="displayEditToggle()" >Close</button>
 </div>
 
-
-<h5> No Match for these. Try searching with different names. Otherwise, clink the button to confirm that this journal is not ranked high enough and we will disregard it in future searches. </h5>
+<hr>
+<h5> No Match for these. Try searching with different names. Otherwise, click the button to confirm that this journal is not ranked high enough and we will disregard it in future searches. </h5>
 
 
 	<app-edit-journal [journals]="rankings.noMatch"  (addedRanks)="addRank($event)">
@@ -40,6 +40,13 @@
 <hr>
 <button (click)="readyDL()" >  --Download PDFs-- </button> <p>(This works only for GS ranks. You will need to gather PDFs for Impact Factors manually)</p>
 
+	<p>Known Impact Factor Links:</p>
+		<p *ngFor = "let item of rankings.rankedJournals; let i = index">
+			<a *ngIf="rankings.rankedJournals[i].IFLink" href="{{rankings.rankedJournals[i].IFLink}}" target="_blank">-- {{rankings.rankedJournals[i].journalName}} --</a>
+		</p>
+		
+
+
 		<p *ngFor="let item of rankings.rankedJournals let i = index" >
 		<span *ngIf="!rankings.rankedJournals[i].IFLink"> Submit IF for: {{rankings.rankedJournals[i].journalName}} 
 		<app-add-iflink [journal]="rankings.rankedJournals[i]"></app-add-iflink> </span> 
@@ -56,11 +63,7 @@
 	numbers: gsRankNumbers[i]}"> </app-display-links>
 
 
-	<p>Known Impact Factor Links:</p>
-		<p *ngFor = "let item of rankings.rankedJournals; let i = index">
-			<a *ngIf="rankings.rankedJournals[i].IFLink" href="{{rankings.rankedJournals[i].IFLink}}" target="_blank">-- {{rankings.rankedJournals[i].journalName}} --</a>
-		</p>
-		
+
 	
 	
 

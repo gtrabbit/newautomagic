@@ -5,7 +5,8 @@ mongoose.Promise = require('bluebird');
 const tinyreq = require('tinyreq');
 const rank = require('./rankingDB').module.rank;
 const pdf = require('html-pdf');
-const fs = require('fs');
+
+const cleaner = require('./clean');
 
 
 // the meat, so to speak
@@ -67,13 +68,8 @@ const checkDups = function (a, cat){
   }
   return false;
 }
-//cleans title of punc and caps for easy searching
 
-const clean = function (a){
- 
-  a = a.toLowerCase().replace(/\s(and|&|of|the|in|on)\s/g, " ").replace(/[^\s\w]/g, " ").replace(/\s+/g, " ").trim();
-  return (a);
-}
+
 
 const submitRanks = function (ranks, link){
    
@@ -162,7 +158,6 @@ const scrape = function (website, cb){
               }
               totalPagesSearched++;
               
-              makePDF(body, website);
             //this scans the page and submits rankings for top 10 on each
               scrapeRanks(body, website);
               linksLooked++;

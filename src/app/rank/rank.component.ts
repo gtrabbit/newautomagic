@@ -27,14 +27,8 @@ export class RankComponent implements OnInit {
   constructor(private FRS: FormatRanksService, private GPS: GetpdfsService) { }
 
   ngOnInit() {
-   
+     this.removeUnranked();
 
-    for (let i = 0; i<this.rankings.rankedJournals.length; i++){
-      if (this.rankings.rankedJournals[i].noRank){
-        this.unRanked.push(this.rankings.rankedJournals.splice(i, 1));
-        i--;
-      }
-    }
     
    }
 
@@ -42,10 +36,19 @@ export class RankComponent implements OnInit {
     this.rankings.rankedJournals.push(e);
   }
 
- 
+ removeUnranked(){
+
+    for (let i = 0; i<this.rankings.rankedJournals.length; i++){
+      if (this.rankings.rankedJournals[i].noRank){
+        this.unRanked.push(this.rankings.rankedJournals.splice(i, 1));
+        i--;
+      }
+    }
+ }
 
   showRanks(){
     if (!this.showRankToggle){
+      this.removeUnranked();
       this.acquireLinks();
     }
     

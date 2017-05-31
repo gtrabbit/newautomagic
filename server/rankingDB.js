@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 mongoose.Promise = require('bluebird');
+const cleaner = require('./clean')
 
 
 
@@ -24,10 +25,6 @@ const rankingSchema = new Schema({
     
 })
 
-const clean = function (a){
-   a = a.toLowerCase().replace(/\s(and|&)\s/g, " ").replace(/[^\s\w]/g, " ").replace(/\s+/g, " ").trim();
-  return (a);
-}
 
 rankingSchema.pre('save', function(next){
   let currentDate = new Date();
@@ -35,7 +32,7 @@ rankingSchema.pre('save', function(next){
   this.markModified('updated');
   if (!this.search){
     console.log("there was not already a search field")
-    this.search = [clean(this.journalName)];
+    this.search = [cleaner.clean(this.journalName)];
   }
   next();
 });
@@ -49,7 +46,7 @@ const checkForRanks = function(journalList, cb){
   let total = journalList.length;
  
   journalList.forEach(function(a){
-     rank.find({search: clean(a)}, function(err, journals){
+     rank.find({search: cleaner.clean(a)}, function(err, journals){
        total--;
        if (err) throw err;
        
@@ -72,7 +69,7 @@ const checkForRanks = function(journalList, cb){
 const markAsUnranked = function(journal, cb){
   let unranked = new rank({
     journalName: journal,
-    search: clean(journal),
+    search: cleaner.clean(journal),
     noRank: true,
     complete: true,
     });
@@ -108,7 +105,7 @@ const makeNewJournalRanking = function(journal, cb){
   let message = "success";
   let newJournal = new rank({
     journalName: journal.journalName,
-    search: clean(journal.journalName),
+    search: cleaner.clean(journal.journalName),
     noRank: journal.noRank,
     GSRank: journal.GSRank,
     complete: true,
@@ -190,14 +187,14 @@ const associate = function(journal, alternate, cb){
 
  
 
-  rank.findOne({search: clean(alternate)}, function(err, result){
+  rank.findOne({search: cleaner.clean(alternate)}, function(err, result){
     if (err){console.log(err)}
     if (typeof result.search === 'string'){
        result.search = [result.search];
     }
    
-    if (!result.search.includes(clean(journal))){
-       result.search.push(clean(journal));
+    if (!result.search.includes(cleaner.clean(journal))){
+       result.search.push(cleaner.clean(journal));
       console.log(result);
       result.markModified('search');
       result.save();
@@ -284,15 +281,42 @@ const merge = function(chart, cb){
 
 
 
+
+const tempUpdate = function(){
+
+  rank.find({}, function(err, journals){
+
+    journals.forEach(function(a){
+      for (let j of journals){
+
+      }
+
+
+    })
+   
+
+
+
+  })
+
+
+
+}
+
+
+
+
+
+
 exports.module = {
   makeArray: makeArray,
   checkForRanks: checkForRanks,
-  makeClean: clean,
   markAsUnranked: markAsUnranked,
   submitIFL: submitIFL,
   submitnew: submitnew,
   associate: associate,
   delete: deleteRank,
   rank: rank,
-  merge: merge
+  merge: merge,
+  tempUpdate: tempUpdate
 }

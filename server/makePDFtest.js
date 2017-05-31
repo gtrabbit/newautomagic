@@ -1,5 +1,5 @@
 const tinyreq = require("tinyreq");
-const zip = new require('node-zip')();
+const JSZip = require('jszip');
 const fs = require('fs');
 var pdf = require('html-pdf');
 
@@ -40,7 +40,7 @@ const doAllTheMagic = function(data, cb){
 
 const extraMagic = function(website, cat, date, cb){
   		let catDisplay = cat.cat + " - Google Scholar Metrics";
-  	
+  		let zip = new JSZip();
 		let options = {
 			"header": {
 				"height": "10mm",
@@ -75,12 +75,10 @@ const extraMagic = function(website, cat, date, cb){
 				})
 				let uid = Math.random().toString().substr(2, 7);
 				let location = './tmp/' + uid;
-				console.log(location);
-				if (fs.existsSync('./tmp')){
-					console.log("./tmp exists")
-				} else {
+			
+				if (!fs.existsSync('./tmp')){
 					fs.mkdirSync('./tmp')
-				}
+				} 
 				fs.mkdir(location, function(){
 					if (fs.existsSync(location)){
 		

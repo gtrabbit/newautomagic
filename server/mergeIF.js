@@ -1,7 +1,5 @@
-const clean = function (a){
-   a = a.toLowerCase().replace(/\s(and|&)\s/g, " ").replace(/[^\s\w]/g, " ").replace(/\s+/g, " ").trim();
-  return (a);
-}
+const cleaner = require('./clean');
+
 
 const titleCase = function (string){
   let title = string.toLowerCase().split(" ");
@@ -28,7 +26,7 @@ let list = chart.match(reg);
 list.forEach(function(a){
 	let arr = a.split("  ");
 	let title = titleCase(arr[0].trim());
-  let search = clean(title);
+  let search = cleaner.clean(title);
   
 	let IF = Number(arr[1]);
 	let entry = {
