@@ -70,8 +70,9 @@ const extraMagic = function(website, cat, date, cb){
 				pdfArr.forEach(function(a, i){
 					let name = a.name + ".pdf";
 					zip.file(name, a.buffer);
+					console.log("work so far")
 					data = zip.generate({base64:false,compression:'DEFLATE'});
-					
+					console.log("still working")
 				})
 				let uid = Math.random().toString().substr(2, 7);
 				let location = './tmp/' + uid;

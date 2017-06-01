@@ -82,7 +82,7 @@ export class RankComponent implements OnInit {
             this.gsRankCats.push(a.cat);
             this.gsRankLinks.push(a.catLink.link);
             this.gsRankNumbers.push([Number(a.rank)]);
-          } else {
+          } else if (this.gsRankNumbers[this.gsRankLinks.indexOf(a.catLink.link)]){
             this.gsRankNumbers[this.gsRankLinks.indexOf(a.catLink.link)].push(a.rank)
             this.gsRankNumbers[this.gsRankLinks.indexOf(a.catLink.link)].sort(); 
           }
