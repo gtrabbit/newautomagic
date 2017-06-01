@@ -67,27 +67,39 @@ const extraMagic = function(website, cat, date, cb){
 			count--;
 			if (count < 1){
 				let data;
+				let secondCount = 0;
 				pdfArr.forEach(function(a, i){
 					let name = a.name + ".pdf";
 					zip.file(name, a.buffer);
 					console.log("work so far")
-					data = zip.generate({base64:false,compression:'DEFLATE'});
-					console.log("still working")
-				})
-				let uid = Math.random().toString().substr(2, 7);
-				let location = './tmp/' + uid;
-			
-				if (!fs.existsSync('./tmp')){
-					fs.mkdirSync('./tmp')
-				} 
-				fs.mkdir(location, function(){
-					if (fs.existsSync(location)){
-		
-				}
-					fs.writeFileSync(location + "/pldocs.zip", data, 'binary')
+					zip.generateAsync({type:'nodebuffer',
+											compression:'STORE'})
+					.then(function(content){
+						secondCount++;
+						if (secondCount === pdfArr.length){
+							let uid = Math.random().toString().substr(2, 7);
+							let location = './tmp/' + uid;
+							if (!fs.existsSync('./tmp')){
+								fs.mkdirSync('./tmp')
+							} 
+							fs.mkdir(location, function(){
+								fs.writeFileSync(location + "/pldocs.zip", content, 'binary')
+								cb({msg: location})
+								})
+							}
 
-					cb({msg: location})
+
+					}
+						
+											).catch(function(){
+												console.log("didn't work")
+											})
+					
+							
+						;
+					
 				})
+				
 				
 				
 				
