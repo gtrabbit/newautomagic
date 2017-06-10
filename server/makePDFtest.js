@@ -40,6 +40,7 @@ const doAllTheMagic = function(data, cb){
 
 const extraMagic = function(website, cat, date, cb){
   		let catDisplay = cat.cat + " - Google Scholar Metrics";
+  		let caturl = cat.url.replace("scholar.hipr", "scholar.google")
   		let zip = new JSZip();
 		let options = {
 			"header": {
@@ -48,7 +49,7 @@ const extraMagic = function(website, cat, date, cb){
 			},
 			"footer":{
 				"height": "10mm",
-				"contents": "<span style='font-size: 10px; overflow: hidden'>" + cat.url + "</span>"
+				"contents": "<span style='font-size: 10px; overflow: hidden'>" + caturl + "</span>"
 			},
 			"format": "Letter",
 			"border": {
