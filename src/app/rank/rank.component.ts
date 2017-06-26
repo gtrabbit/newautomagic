@@ -50,10 +50,17 @@ export class RankComponent implements OnInit {
     if (!this.showRankToggle){
       this.removeUnranked();
       this.acquireLinks();
+      this.sortRankings()
     }
     
   	this.showRankToggle = !this.showRankToggle;
     
+  }
+
+  sortRankings(){
+    this.rankings.rankedJournals.sort(function(a, b){
+      return b.IF - a.IF;
+    })
   }
 
   readyDL(){

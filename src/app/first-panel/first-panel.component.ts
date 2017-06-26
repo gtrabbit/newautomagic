@@ -19,7 +19,7 @@ export class FirstPanelComponent implements OnInit {
   public journalList: string[] = [];
   public displayState: number = 0;
   public totalNumber: number = 0;
-  public removed: string[];
+  public removed: Array<string>;
   public editShow: boolean[] = [];
   public rankings: any;
   public toggleRankPanel: boolean = false;
@@ -75,30 +75,13 @@ export class FirstPanelComponent implements OnInit {
     this.sortToggle = !this.sortToggle;
     if (this.sortToggle){
         this.paperList.sort(function(a, b){
-      if (a.year < b.year){
-        return -1;
-      } else if (a.year > b.year){
-        return 1;
-      } else {
-        return 0;
-      }
-
+      return b.year - a.year
     })
       } else {
           this.paperList.sort(function(b, a){
-      if (a.year < b.year){
-        return -1;
-      } else if (a.year > b.year){
-        return 1;
-      } else {
-        return 0;
-      }
-
+      return a.year - b.year;
     })
       }
-
-
-  
   }
 
   checkDisplayState() {
@@ -119,6 +102,7 @@ export class FirstPanelComponent implements OnInit {
             }
           }
         this.journalList.push(this.included[0].journal)  
+       //this little bit removes duplicates, I'm pretty sure...
         for (let item in this.included){
           if (this.journalList.every((a) => {
             return this.clean(a) !== this.clean(this.included[item].journal)
@@ -127,6 +111,14 @@ export class FirstPanelComponent implements OnInit {
           }
 
         }
+        //now I want to sort out suggested things not to look for
+        this.journalList.forEach((a, i)=>{
+          if (a.match(/patent/gi) || a.match(/abstracts/gi)){
+            this.removed.push(this.journalList.splice(i, 1)[0])
+          }
+
+        })
+
 
         break;
 

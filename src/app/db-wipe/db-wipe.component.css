@@ -1,0 +1,10 @@
+button{
+	background-color: rgb(250,10,10);
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	text-align: center;
+	display: block;
+	margin: auto;
+	line-height: 20px;
+}

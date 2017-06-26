@@ -1,4 +1,4 @@
-	<em (click)="displayEdit()" >{{journal}}:&nbsp; </em><strong *ngIf="ranking.hasOwnProperty('IF')"> <span *ngIf="ranking.IF">Impact Factor = {{ranking.IF}}. </span></strong> <span [innerHTML]= "ranking.formatted">	</span>
+	<em (click)="displayEdit()" >{{journal}}: </em><strong *ngIf="ranking.hasOwnProperty('IF')"> <span *ngIf="ranking.IF">Impact Factor = {{ranking.IF}}. </span></strong> <span [innerHTML]= "ranking.formatted">	</span>
 <div *ngIf="displayEditToggle">
 <app-add-if  [model]="editJournal" ></app-add-if> <button class="side" (click)="displayEdit()" >Close</button>
 </div>

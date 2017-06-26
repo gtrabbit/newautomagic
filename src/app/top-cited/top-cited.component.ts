@@ -13,7 +13,7 @@ export class TopCitedComponent implements OnInit, OnChanges {
   @Input() pbf: Object = {};
   @Input() paperList: Article[] = [];
   @Input() name: string = "Client";
-  public payLoad: Array<string> = ["'s article, &ldquo;", "&rdquo; published in ", ", has received <strong>", " citations </strong> to date. For all articles published in the category of ", " in ", ", the average number of citations is only ", ". This article is thus one of the <strong style='text-decoration: underline'> top ", "</strong><strong> most cited articles published in ", " in "];
+  public payLoad: Array<string> = ["'s article &ldquo;", ",&rdquo; published in ", ", has received <strong>", " citations </strong> to date. For all articles published in the category of ", " in ", ", the average number of citations is only ", ". This article is thus one of the <strong style='text-decoration: underline'> top ", "</strong><strong> most cited articles published in ", " in "];
   public mostCitedList: Array<string>;
   
 
@@ -29,10 +29,7 @@ export class TopCitedComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(){
-    console.log(this.pbf);
-    console.log(this.field);
     this.getMostCited();
-
   }
 
   getMostCited(){
@@ -57,8 +54,11 @@ export class TopCitedComponent implements OnInit, OnChanges {
       }
 
     })
-    
-    this.mostCitedList = readOut;
+   
+
+    this.mostCitedList = readOut.sort((a, b)=>{
+      return Number(a.match(/top \d.+(?=%)/gi)[0].slice(4)) - Number(b.match(/top \d.+(?=%)/gi)[0].slice(4))
+    })
 
     
   }

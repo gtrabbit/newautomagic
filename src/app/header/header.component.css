@@ -1,21 +1,32 @@
 nav{
-	background-color: silver;
+	background: linear-gradient(45deg, silver, rgba(120,160,190,0.2), silver);
 	border-bottom: solid black 2px;
+	display: flex;
+	justify-content: space-between;
+	font-size: 10px;
+	padding: 0.3%;
+	align-items: center;
 }
 
 nav a{
 	cursor: pointer;
 }
 
+nav button{
+	display: inline-block;
+}
 
+nav p{
+	margin: 0px;
+}
 
-app-admin-panel, app-login{
+app-admin-panel{
 	position: absolute;
 	display: block;
 	width: 92vw;
 	height: 90vw;
 	margin: auto;
-	top: 0px;
+	top: 30px;
 	left: 2vw;
 	background-color: white;
 	border: solid black 2px;

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { RankingService } from '../ranking.service';
 import { NoRankService } from '../no-rank.service';
+import { LoginService } from "../login.service";
 
 @Component({
   selector: 'app-edit-journal',
@@ -19,7 +20,7 @@ export class EditJournalComponent implements OnInit {
   public searchedFor: string;
   public disabledArr: Array<Boolean> = []
 
-  constructor(private RS: RankingService, private nR: NoRankService) { }
+  constructor(private RS: RankingService, private nR: NoRankService, private LIS: LoginService) { }
 
   ngOnInit() {
 
@@ -39,7 +40,8 @@ export class EditJournalComponent implements OnInit {
   }
 
   markAsNoRank(i){
-    this.nR.submitNoRank(this.journals[i])
+    if (this.LIS.currentUser.dbwrite){
+       this.nR.submitNoRank(this.journals[i])
       .subscribe(
         body => {
           this.disabledArr[i] = true;
@@ -47,6 +49,10 @@ export class EditJournalComponent implements OnInit {
 
         },
         error => console.log(error))
+    } else {
+       window.alert("You are not authorized to edit the database. Try logging in.")
+    }
+   
   }
 
 	

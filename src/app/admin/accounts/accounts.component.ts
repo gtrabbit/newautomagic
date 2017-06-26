@@ -16,7 +16,8 @@ export class AccountsComponent implements OnInit {
 		username: null,
 		email: null,
 		password: null,
-		admin: false
+		admin: false,
+    dbwrite: false
 	}
 	creationMsg: string = "";
   deleteMsg: string = "";
@@ -42,7 +43,7 @@ export class AccountsComponent implements OnInit {
 
   submit(){
   	
-  	let user = new User(this.model.firstName, this.model.lastName, this.model.username, this.model.email, this.model.password, this.model.admin);
+  	let user = new User(this.model.firstName, this.model.lastName, this.model.username, this.model.email, this.model.password, this.model.admin, this.model.dbwrite);
   	this.CAS.create(user).subscribe(
   		body => this.creationMsg = body.json().msg)
   }

@@ -27,7 +27,7 @@
 <h5>
 	Once you've finished above, click "Show Ranks." (if you click this early, the links for the pdfs won't be complete. You can just toggle the reveal by clicking it twice, though.)
 </h5>
-<button (click)="showRanks()"> Show Ranks </button>
+<button class="centerBlock" (click)="showRanks()"> Show Ranks </button>
 
 <div *ngIf="showRankToggle">
 	<p>
@@ -38,7 +38,9 @@
 		<p *ngFor="let item of rankings.rankedJournals let i = index" > <app-display-ranking [results]="rankings.rankedJournals[i]" [journal]="item.journalName" > </app-display-ranking> 
 		</p>
 <hr>
-<button (click)="readyDL()" >  --Download PDFs-- </button> <p>(This works only for GS ranks. You will need to gather PDFs for Impact Factors manually)</p>
+<button class="DLbutton centerBlock" (click)="readyDL()" >  DL PDFs </button> <p class="small">(This works only for GS ranks. You will need to gather PDFs for Impact Factors manually)</p>
+
+<hr>
 
 	<p>Known Impact Factor Links:</p>
 		<p *ngFor = "let item of rankings.rankedJournals; let i = index">

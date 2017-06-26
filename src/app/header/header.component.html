@@ -1,3 +1,15 @@
-<nav> &emsp; <a (click)="showAdminPanel()" >Admin </a> </nav>
+<nav> &emsp; 
+	<label>
+		Username:
+		<input #username type="text" name="username">
+	</label> 
+	<label> Password: 
+		<input #password type="password" name="password">
+	</label>
+	<button (click)="submit(username.value, password.value)" >Submit</button>
+	<p>Hello, {{_user.firstName}}  &emsp; </p>
+	<a *ngIf="_user.username !== 'Guestuser' " (click)="logout()" > Logout? </a>
+	<a (click)="showAdminPanel()" *ngIf="isAdmin()" ><strong>Admin</strong></a> 
+</nav>
 
-<app-login *ngIf="accessDenied" (closed)="showAdminPanel()"></app-login>
+<app-admin-panel *ngIf="accessDenied" (closed)="showAdminPanel()" ></app-admin-panel>

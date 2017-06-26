@@ -218,6 +218,21 @@ const associate = function(journal, alternate, cb){
 
  }
 
+ const deleteEverything = function(cb){
+  rank.remove({}, function(err){
+    if (err) console.log(err)
+    
+  })
+  rank.find({}, function(err, results){
+    if (err) console.log(err)
+    if (!results.length){
+      cb({msg: "Database is wiped"})
+    } else {
+      cb({msg: "" + results.length + " entries in the database"})
+    }
+  })
+ }
+
 
 
 
@@ -240,8 +255,8 @@ const merge = function(chart, cb){
   let noMatch = [];
   let matches = 0;
   let total = chart.length;
-  console.log(chart)
   console.log(chart.length)
+  let errored = []
   chart.forEach(function(a){
    
     rank.find({search: a.search}, function(err, journals){
@@ -249,7 +264,12 @@ const merge = function(chart, cb){
       if (journals.length){
         journals[0].IF = a.IF;
         journals[0].save(function(err){
-          if (err) throw err;
+          if (err) {
+            console.log(err);
+            console.log(journals[0])
+            errored.push(journals[0])
+          }
+          console.log(total)
         })
         
         matches++;
@@ -263,14 +283,23 @@ const merge = function(chart, cb){
         makeNew.save(function(err){
           if (err) {
             console.log(makeNew);
-            throw err;
+            console.log(err);
+            console.log("Trying to handle error...")
+            errored.push(makeNew);
+
           }
         })
-        noMatch.push(a);
+        noMatch.push(a.search);
         total--;
+        console.log(total);
       }
         if (total === 0){
-    cb ({noMatch: noMatch, matches: matches});
+          if (errored.length){
+            errored.forEach(function(a){
+              console.log(a);
+            })
+          }
+          cb ({noMatch: noMatch, matches: matches});
   } 
     })
     
@@ -280,29 +309,13 @@ const merge = function(chart, cb){
 }
 
 
-
-
-const tempUpdate = function(){
-
-  rank.find({}, function(err, journals){
-
-    journals.forEach(function(a){
-      for (let j of journals){
-
-      }
-
-
-    })
-   
-
-
-
+const findAll = function(cb){
+  rank.find({}, function(err, results){
+    cb({msg: results.length,
+        wholeDB: results})
   })
 
-
-
 }
-
 
 
 
@@ -318,5 +331,6 @@ exports.module = {
   delete: deleteRank,
   rank: rank,
   merge: merge,
-  tempUpdate: tempUpdate
+  deleteEverything: deleteEverything,
+  findAll: findAll
 }

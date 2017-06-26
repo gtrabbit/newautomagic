@@ -16,4 +16,8 @@ export class RankScraperService {
   	return this.http.get('./ranks/' + "lastUpdated")
   }
 
+  totalNumber(): Observable<Response>{
+  	return this.http.get('./ranks/total')
+  }
+
 }

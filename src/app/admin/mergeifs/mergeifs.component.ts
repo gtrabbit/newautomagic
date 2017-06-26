@@ -23,7 +23,7 @@ export class MergeifsComponent implements OnInit {
         this.newfound = body.json().noMatch;
 
       },
-      err => this.confirmation = "Error. Try correcting the formatting."
+      err => this.confirmation = "Error. Try correcting the formatting, or simply hit submit again."
       )
 
   }

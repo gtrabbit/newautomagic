@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RankingService } from '../ranking.service';
 import { FormatRanksService } from '../format-ranks.service';
 import { DeleteEntryService } from "../delete-entry.service";
+import { LoginService } from "../login.service";
 
 @Component({
   selector: 'app-search',
@@ -23,14 +24,21 @@ export class SearchComponent implements OnInit {
   displayEdit: boolean;
 	
 
-  constructor(private RS: RankingService, private FRS: FormatRanksService, private DES: DeleteEntryService) { }
+  constructor(private RS: RankingService, private FRS: FormatRanksService, private DES: DeleteEntryService, private LIS: LoginService) { }
 
   ngOnInit() {
   
   }
 
+
+
   edit(){
-    this.displayEdit = !this.displayEdit;
+    if (this.LIS.currentUser.dbwrite){
+      this.displayEdit = !this.displayEdit;
+    } else {
+      window.alert("You are not authorized to edit the database. Try logging in.")
+    }
+    
   }
 
   search(journal){
@@ -69,7 +77,8 @@ export class SearchComponent implements OnInit {
   }
 
   delete(results){
-    if (window.confirm("For Serious Delete This --Forever?")){
+    if (this.LIS.currentUser.dbwrite){
+        if (window.confirm("For Serious Delete This --Forever?")){
       this.DES.delete(results).subscribe(
       body => {
         console.log(body.json())
@@ -79,6 +88,11 @@ export class SearchComponent implements OnInit {
     }
     
 
+  } else {
+    window.alert("You are not authorized to edit the database. Try logging in.")
+  }
+
+  
 
   }
 

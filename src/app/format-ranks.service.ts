@@ -60,33 +60,55 @@ export class FormatRanksService {
      } 
 
       
-      //creates string for displaying GS ranks
+      //creates string for displaying GS ranks, sorted from highest to lowest
  formatRanks(ranks, cats) {
-   let text = "";
-   if (ranks.length){
-      text = "<strong> Ranked "
-   }
-   
-    for (let i=0; i<ranks.length; i++){
-      text = text.concat("#" + ranks[i] + "</strong> in " + cats[i])
-      if ((ranks.length - i) === 2){
-        text = text.concat(" and <strong>")
-      } else if ((ranks.length - i) > 2){
-       
-        text = text.concat(", <strong>")
-      }
-     
-    }
-     if (ranks.length){
-      text = text.concat(" by Google Scholar")
-   }
+  let text = "";
+  if (ranks.length){
+    let assArr = [];
     
-    return text;
+    for (let i=0; i<ranks.length; i++){
+      assArr.push([ranks[i], cats[i]])
+    }
+
+    assArr.sort(function(a, b){
+      return a[0] - b[0];
+    })
+    
+    text = "<strong>Ranked ";
+
+    for (let i=0; i<assArr.length; i++){
+      text = text.concat("#" + assArr[i][0] + "</strong> in " + assArr[i][1])
+      if ((ranks.length - i) === 2){
+        text = text.concat(" and <strong>");
+      } else if ((ranks.length - i) > 2){
+        text = text.concat(", <strong>");
+      }
+    }
+      if (ranks.length){
+        text = text.concat(" by Google Scholar")
+      }
   }
+  return text;
+}
+   
+  //   for (let i=0; i<ranks.length; i++){
+  //     text = text.concat("#" + ranks[i] + "</strong> in " + cats[i])
+  //     if ((ranks.length - i) === 2){
+  //       text = text.concat(" and <strong>")
+  //     } else if ((ranks.length - i) > 2){
+       
+  //       text = text.concat(", <strong>")
+  //     }
+     
+  //   }
+  //    if (ranks.length){
+  //     text = text.concat(" by Google Scholar")
+  //  }
+    
+  //   return text;
+  // }
   
 
-
 }
-
 
 

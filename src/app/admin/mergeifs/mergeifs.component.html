@@ -1,8 +1,11 @@
 <h3> Update Impact Factors </h3>
 
-<p> The server expects plain text taken from a .csv file containing only impact factors over 4. Please refer to instructions if you need help. The instructions for removing formatting can be applied here. Enter the text below and hit submit.  </p>
+<p> The server expects plain text taken from a .xlsx file. Only paste impact factors over 4. Please refer to instructions if you need help.  Enter the text below and hit submit.  </p>
 
 <textarea #ifchart name="ifdata" ></textarea>
 <button (click)="submit(ifchart.value)" >Submit</button>
 <p> Matched {{confirmation}} journals </p>
-<p> Found {{newfound}} journals not previous listed </p>
+<p> Found {{newfound.length}} journals not previous listed </p>
+<ul>
+	<li *ngFor="let names of newfound"  > {{names}} </li>
+</ul>

@@ -15,46 +15,64 @@ let erroredPages = [];
 
 const scrapeRanks = function(body, link){
 
- // console.log("this has been called");
-  const topReg = /<td class="gs_title">(.*?)<\/td>/g;
-  const cNReg = /Top publications - (.*?)(?=<\/h3)/;
+//finds the table where journal titles are stored
+  const tableReg = /<table id="gsc_mvt_table" class="gsc_mp_table">(.+)<\/table>/;
+//finds each title within the table
+  const titleNamesReg = /<td class="gsc_mvt_t">(.*?)<\/td>/g;
 
-  if (!cNReg.exec(body)){
+//finds the name of the category
+  const catNameReg = /<h1 class="gs_hdr_mbo" dir="ltr">(.+)<\/h1>/;
+
+
+
+//checks to make sure a valid page is being displayed, i.e. we didn't hit a captcha wall or something
+  if (!catNameReg.exec(body)){
     console.log("encountered something unexpected");
     erroredPages.push(link);
     console.log(body);
   } else {
 
-
+//use regexps to gather info  
+  let CatName = catNameReg.exec(body)[1];
+  let table = body.match(tableReg);
+  let titles = table[0].match(titleNamesReg)
   
-  let CatName = cNReg.exec(body)[1];
-  let category = body.match(/<table id="gs_cit_list_table">.+<td class="gs_pos">11./g);
-  let TopCat = category[0].match(topReg);
-  
-  
-  
+//setup data structure
   let ranks = {cat: CatName,
               top10: []};
-  TopCat.forEach(function(a){
-    let b = a.match(/>.+</)[0];
+
+//reduce to top 10 only
+  let topTenTitles = titles.slice(1, 11);
+
+//enter titles into data structure 
+  topTenTitles.forEach(function(a){
+    b = a.slice(22, -5);
     b = b.replace(/&amp;/g, "&");
     b = b.replace(/&#8211;/g, "--");
     b = b.replace(/&#8208;/g, "-");
-    ranks.top10.push(b.slice(1, b.length-1));
-             
+    ranks.top10.push(b);         
     });
-   
+ 
+ //execute next section of code  
     submitRanks(ranks, link);
-    }
-    }
+  }
+}
+
+
 
 const findLinks = function (body){
-  let nav = body.match(/<ul class="gs_ibl">.+<\/ul>/g)[0].replace(/amp;/g, "");
-  let cats = nav.match(/href="(.*?)"/g)
+  console.log("attempting to find new links")
+  //finds location of navigation
+  const findNavReg = /<div class="gs_md_ul">(.*?)<\/div>/;
+  //picks out links to categories
+  const linkReg = /<a href="(.*?)"/g;
+
+
+  let nav = body.match(findNavReg)[0];
+  let cats = nav.match(linkReg);
   let links = []
   cats.forEach(function(a){
-    a=a.slice(6);
-    links.push("http://scholar.hipr.com"+a.slice(0, a.length-1));
+    links.push("http://scholar.hipr.com"+a.slice(9, -1).replace(/&amp;/g, "&"));
     })
   return links;
   }
@@ -74,7 +92,7 @@ const checkDups = function (a, cat){
 const submitRanks = function (ranks, link){
    
     ranks.top10.forEach(function(a, i){
-      let search = clean(a);
+      let search = cleaner.clean(a);
       let position = i+1;
       let category = ranks.cat;
       rank.find({search: search}, function(err, journal){
@@ -144,10 +162,6 @@ const submitRanks = function (ranks, link){
 const scrape = function (website, cb){
   let totalPagesSearched = 0;
   let linksLooked = 0;
-
-
-    
- 
           tinyreq({
             url: website,
             data_encoding: "UTF-8"
@@ -163,10 +177,11 @@ const scrape = function (website, cb){
               linksLooked++;
             //gets all sub categories from the page
             let links = findLinks(body)
-
             linksLooked += links.length;
-
             links.forEach(function(a, i, array){
+              console.log(a);
+              console.log("looking at new link");
+
               (function(i){
                 setTimeout(function(){
                   tinyreq({
@@ -181,7 +196,6 @@ const scrape = function (website, cb){
                     //this scans the page and submits rankings for top 10 on each
                     scrapeRanks(body, array[i]);
                     let links = findLinks(body);
-                 
                     linksLooked += links.length;
                     links.forEach(function(a, i, array){
                       (function(i){
@@ -191,36 +205,20 @@ const scrape = function (website, cb){
                             data_encoding: "UTF-8"
                           }, (err, body) => {
                             scrapeRanks(body, array[i]);
-
-
                             totalPagesSearched++;
-                            
+                            console.log(totalPagesSearched)
                             if (totalPagesSearched === linksLooked-5){
-                              
                               cb({msg: "GS Ranks successfully updated"});
-
                             }
-                            
-
-
-
-
                           } )
-
-
                         }, i*2000)
                       }(i))
                     })
                   })
                 }, i*1600)
-
               }(i));
-
             })
           })
-
-
-
 }
   
   

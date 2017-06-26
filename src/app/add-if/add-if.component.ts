@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Pipe } from '@angular/core';
 import { Ranking } from '../ranking';
 import { AddRankService } from '../add-rank.service';
+import { LoginService } from "../login.service";
 
 @Component({
   selector: 'app-add-if',
@@ -20,7 +21,7 @@ export class AddIFComponent implements OnInit {
 	
 
 
-  constructor(private ARS: AddRankService) { }
+  constructor(private ARS: AddRankService, private LIS: LoginService) { }
 
   ngOnInit() {
   	
@@ -73,17 +74,22 @@ export class AddIFComponent implements OnInit {
 
 //finalizes the rank and sends to the DB
   onSubmit(){
-    this.showResponse = false;
-    this.model.noRank = this.info;
-    this.model.GSRank = this.compileGSRanks();
-    this.model.complete = true;
-    this.model.updated = new Date();
-    this.ARS.submitRank(this.model, this.overwrite).subscribe(
-      body => {
-        this.showResponse = true;
-        this.response = body.json().msg.slice(0, 7);
+    if (this.LIS.currentUser.dbwrite){
+      this.showResponse = false;
+      this.model.noRank = this.info;
+      this.model.GSRank = this.compileGSRanks();
+      this.model.complete = true;
+      this.model.updated = new Date();
+      this.ARS.submitRank(this.model, this.overwrite).subscribe(
+        body => {
+          this.showResponse = true;
+          this.response = body.json().msg.slice(0, 7);
 
       });
+    } else {
+      window.alert("You are not authorized to edit the database. Try logging in.")
+    }
+    
   }
 
 }

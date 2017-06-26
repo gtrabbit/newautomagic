@@ -10,11 +10,14 @@ import { RankScraperService } from '../rank-scraper.service';
 export class ScraperComponent implements OnInit {
   
   confirmation: string = "";
-
+  numberOfEntries = 0;
 
   constructor(private RSS: RankScraperService) { }
 
   ngOnInit() {
+    this.RSS.totalNumber().subscribe(
+      body=> {this.numberOfEntries = body.json().msg;
+              console.log(body.json())})
   }
 
   scrape(){

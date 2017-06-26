@@ -9,6 +9,7 @@
 	<label> email: <input type="text" name="email" [(ngModel)]="model.email" > </label>
 	<label> password: <input type="password" name="password" [(ngModel)]="model.password" > </label>
 	<label> admin? <input type="checkbox" name="admin" [(ngModel)]="model.admin" > </label>
+	<label> Can edit database? <input type="checkbox" name="dbwrite" [(ngModel)]="model.dbwrite" > </label>
 	<button type="submit" (click)="submit()" [disabled]="checkValid()"> Submit </button>
 </form>
 <span> &emsp; {{creationMsg}} </span>

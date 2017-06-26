@@ -8,7 +8,8 @@ const userSchema = new Schema({
 	firstName: String,
 	lastName: String,
 	email: String,
-	admin: Boolean    
+	admin: Boolean,
+	dbwrite: Boolean    
 })
 
 
@@ -34,8 +35,8 @@ const deleteUser = function(user, cb){
 const checkUser = function(user, pw, cb){
 	users.find({username: user}, function(err, userFound){
 		err ? cb(false) : 
-			userFound.length ?
-			cb(userFound[0].password === pw) :
+			userFound.length && userFound[0].password === pw ?
+			cb(userFound) :
 			cb(false)
 	})
 }
@@ -52,14 +53,6 @@ const findUser = function(user, cb){
 }
 
 
-// {
-// 		username: user.username,
-// 		password: user.password,
-// 		firstName: user.firstName,
-// 		lastName: user.lastName,
-// 		email: user.email,
-// 		admin: user.admin 
-// 		}
 
 const makeNew = function(user, cb, edited){
 	if (edited){
@@ -72,7 +65,8 @@ const makeNew = function(user, cb, edited){
 				firstName: user.firstName,
 				lastName: user.lastName,
 				email: user.email,
-				admin: user.admin 
+				admin: user.admin,
+				dbwrite: user.dbwrite 
 				}
 			},
 			 {

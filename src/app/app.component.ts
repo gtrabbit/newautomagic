@@ -11,5 +11,5 @@ import { GetpdfsService } from './getpdfs.service';
   providers: [ FormatRanksService, RankingService, DeleteEntryService, GetpdfsService ]
 })
 export class AppComponent {
-  title = 'Title';
+  title = 'AM 2.1';
 }

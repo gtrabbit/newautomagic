@@ -79,6 +79,14 @@ app.post('/admin/updatepbf', function(req, res){
 
 })
 
+app.get("/admin/deleteeverything", function(req, res){
+  const cb = function(data){
+    res.send(data)
+  }
+  ranks.module.deleteEverything(cb);
+})
+
+
 app.get("/admin/scrape", function(req, res){
   const cb = function(data){
     res.send(data);
@@ -106,6 +114,15 @@ app.get("/admin/delete/:user", function(req, res){
 
 
 })
+
+app.get('/ranks/total', function(req, res){
+  const cb = function(data){
+    res.send(data)
+  }
+  ranks.module.findAll(cb);
+
+})
+
 
 app.post("/admin/create", function(req, res){
   const cb = function(data){
@@ -261,11 +278,7 @@ app.post('/mergeifs', function(req, res){
         }).on('end', function() {
             body = Buffer.concat(body).toString();
             if (body) {
-            
-              console.log("this worked so far")
               let IFchart = merge.createJSON(body);
-              console.log(IFchart)
-              console.log("made it through this")
               ranks.module.merge(IFchart, cb)
             } 
         });

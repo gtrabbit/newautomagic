@@ -17,10 +17,9 @@
 			<p *ngIf = "results[i].rankedJournals.length">Is this correct? Add to List? 
 			<button
 			 (click)="addRank(results[i].rankedJournals[0], i)"
-			 (click)="AR.associate()"
 			 > Add </button>
 		
-			<app-associate-rank #AR [journal]="journals[i]" [result]="results[i].rankedJournals[0].journalName" ></app-associate-rank> </p> 
+			</p> 
 					
 		</div>
 

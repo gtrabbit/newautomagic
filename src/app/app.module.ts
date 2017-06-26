@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { TitleCaseService } from './title-case.service';
+import { LoginService } from './login.service';
 import { AppComponent } from './app.component';
 import { ProfileSearchComponent } from './profile-search/profile-search.component';
 import { SearchComponent } from './search/search.component';
@@ -25,9 +26,9 @@ import { PbfComponent } from './admin/pbf/pbf.component';
 import { ScraperComponent } from './admin/scraper/scraper.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AccountsComponent } from './admin/accounts/accounts.component';
-import { LoginComponent } from './login/login.component';
 import { MergeifsComponent } from './admin/mergeifs/mergeifs.component';
 import { PaperExhibitComponent } from './exhibit-index-builder/paper-exhibit/paper-exhibit.component';
+import { DbWipeComponent } from './db-wipe/db-wipe.component';
 
 
 @NgModule({
@@ -53,16 +54,16 @@ import { PaperExhibitComponent } from './exhibit-index-builder/paper-exhibit/pap
     ScraperComponent,
     AdminPanelComponent,
     AccountsComponent,
-    LoginComponent,
     MergeifsComponent,
-    PaperExhibitComponent
+    PaperExhibitComponent,
+    DbWipeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [ TitleCaseService, AddRankService ],
+  providers: [ TitleCaseService, AddRankService, LoginService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

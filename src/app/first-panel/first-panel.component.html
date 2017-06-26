@@ -83,6 +83,14 @@
 
 
 <hr>
-<button (click)="previous()" [disabled]="displayState<1">Previous</button>
-<button (click)="next()" [disabled]="displayState>3 || paperList.length===0"> Next </button>
-<button (click)="close()">Finish</button>
+<div class="buttonHolder">
+	<div class="half">
+		<button (click)="previous()" [disabled]="displayState<1">Previous</button>
+		<button (click)="next()" [disabled]="displayState>3 || paperList.length===0"> Next </button>
+	</div>
+
+	<div class="half right">
+		<button  (click)="close()">Close</button>
+	</div>
+	
+</div>

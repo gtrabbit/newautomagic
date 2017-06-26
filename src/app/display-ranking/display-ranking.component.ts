@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FormatRanksService } from '../format-ranks.service';
 import { Ranking } from '../ranking';
+import { LoginService } from "../login.service";
 
 @Component({
   selector: 'app-display-ranking',
@@ -20,7 +21,7 @@ export class DisplayRankingComponent implements OnInit, OnChanges {
 
 
 
-  constructor(private FRS: FormatRanksService) { }
+  constructor(private FRS: FormatRanksService, private LIS: LoginService) { }
 
   ngOnInit() {
   }
@@ -30,15 +31,18 @@ export class DisplayRankingComponent implements OnInit, OnChanges {
   }
 
   displayEdit(){
-    if (this.displayEditToggle === true){
-      this.displayEditToggle = false;
+    if (this.LIS.currentUser.dbwrite){
+      if (this.displayEditToggle === true){
+        this.displayEditToggle = false;
+      } else {
+        this.editJournal = this.journalRank;
+        this.displayEditToggle = true;
+      }
     } else {
-      this.editJournal = this.journalRank;
-      this.displayEditToggle = true;
+      window.alert("You are not authorized to edit the database. Try logging in.")
     }
 
-   
-
+  
 
   }
 

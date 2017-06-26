@@ -19,6 +19,8 @@ const titleCase = function (string){
   
 }
 
+
+
 const createJSON = function (chart){
 let reg = /([\w\s-:&]+)\s\s([\d+\.]+)\s{4}/g
 let JSONIF = [];

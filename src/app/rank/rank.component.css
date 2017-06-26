@@ -16,3 +16,25 @@ app-edit-journal{
 .am-ende{
 	float: right;
 }
+
+.small{
+	font-size: 10px;
+}
+
+.centerBlock{
+	display: block;
+	margin: 30px auto;
+}
+
+.DLbutton{
+	height: 70px;
+	border-radius: 50%;
+	background: radial-gradient(circle closest-side, rgba(100,100,160,0.5), rgba(100,100,180, 0.6));
+	border: double darkolivegreen 4px;
+	box-shadow: none;
+
+}
+
+.DLbutton:hover{
+	background: radial-gradient(circle closest-side, rgba(100,100,160,0.7), rgba(100,100,180, 0.9));
+}
