@@ -232,7 +232,7 @@ const scrape = function (website, cb){
       'user-agent': "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
     }, (err, body) =>{
       if (err) console.log(err);
-
+      console.log(body)
       let something = body.match(/<h3 class="gs_rt">(.*?)<\/h3>/g)
       cb({data: something});
 
