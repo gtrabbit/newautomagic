@@ -12,11 +12,18 @@
 	border: double rgb(20,4,5) 4px;
 }
 
-.closeBtn{
+.top{
 	position: absolute;
 	top: 3px;
 	right: 3px;
+}
+
+.closeBtn{
 	height: 30px;
 	padding: 1%;
+}
 
+.bottom{
+	display: block;
+	margin: auto;
 }

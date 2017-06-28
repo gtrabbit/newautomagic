@@ -1,19 +1,24 @@
 <p>A work in progress... </p>
 
-<!-- <label> Client's Name: {{name.value}}
-<input #name type="text" name="cName" placeholder="Client">		
+<p>None of this works yet, btw</p>
+
+<button  (click)="log()" > log </button>
+
+<label> Client's Name: {{name.value}}
+<input #name type="text" name="cName" placeholder="Client" [(ngModel)]="client.name" >		
 </label>
 
+<hr>
 
-<h3>Exhibits:</h3>
+<p>INDEX OF EXHIBITS</p>
 <div class="simple-border">
 	
 <p>{{name.value}}'s CV</p>
 <p>{{name.value}}'s diploma and transcripts</p>
 <p>Evidence regarding {{name.value}}'s current employment</p>
 
-<app-paper-exhibit *ngFor="let paper in paperList; let i = index" ></app-paper-exhibit>
+<app-paper-exhibit *ngFor="let paper of paperList; let i = index" ></app-paper-exhibit>
 
 
 </div>
- -->
+

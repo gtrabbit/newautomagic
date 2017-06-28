@@ -32,6 +32,12 @@ app.get("/", function(req, res){
 
 })
 
+
+app.get("/tempupdate", function(req, res){
+  ranks.module.tempupdate();
+})
+
+
 app.post('/getpdfs', function(req, res){
   const cb = function(data){
     res.send(data);
@@ -55,7 +61,6 @@ app.post('/getpdfs', function(req, res){
             } 
         });
 })
-
 
 app.post('/admin/updatepbf', function(req, res){
   
@@ -91,7 +96,7 @@ app.get("/admin/scrape", function(req, res){
   const cb = function(data){
     res.send(data);
   }
-  scraper.scrape("http://scholar.hipr.com/citations?view_op=top_venues&hl=en&vq=en", cb)
+  scraper.module.scrape("http://scholar.hipr.com/citations?view_op=top_venues&hl=en&vq=en", cb)
 
 })
 
@@ -230,9 +235,11 @@ app.post("/getpaperlist", function(req, res){
         });
 
 
-   let cb = function (paperList){
+   let cb = function (paperList, body){
 
-     res.send(paperList);
+     res.send({
+      paperList: paperList,
+      body: body});
   }
   
   
@@ -285,6 +292,16 @@ app.post('/mergeifs', function(req, res){
 
   
 
+
+})
+
+
+app.get('/getcitingpapers/:url', function(req, res){
+  const cb = function(data){
+    res.send(data)
+  }
+  website = "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=".concat(req.params.url)
+  scraper.module.citingPapers(website)
 
 })
 

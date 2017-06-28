@@ -9,6 +9,16 @@ const buildPaperList = function (body){
     })
     
   let journals = [];
+
+  let citationLinkRegEx = /<td class="gsc_a_c"><a href="(.*?)"\s(?=class="gsc_a_ac")/g
+  let citationMatch = citationLinkRegEx.exec(body);
+  let citationLinks = [];
+
+  while (citationMatch !== null){
+    citationLinks.push(citationMatch[1]);
+    citationMatch = citationLinkRegEx.exec(body);
+  }
+
   let init2 = body.match(/<\/div><div class="gs_gray">.*?<span/g);
     
   init2.forEach(function(a){
@@ -44,7 +54,8 @@ const buildPaperList = function (body){
       "year": years[i],
       "citations": citCounts[i],
       "journal": journals[i],
-      "exclude": false
+      "exclude": false,
+      "link": citationLinks[i]
         }
     paperList.push(paper);
     }
@@ -55,6 +66,7 @@ const buildPaperList = function (body){
 
 
 const scrapeProfile = function (website, cb){
+  console.log(website)
   tinyreq({
     url: website,
     headers: {
@@ -81,7 +93,7 @@ const scrapeProfile = function (website, cb){
    
     if (body.search(/gsc_a_at">(.*?)<\/a>/g) !== -1){
       let paperList = buildPaperList(body);
-      cb(paperList); 
+      cb(paperList, body); 
     } else {
       console.log(body);
       console.log("I think this might result in a captcha")

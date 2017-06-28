@@ -320,6 +320,35 @@ const findAll = function(cb){
 
 
 
+const tempupdate = function(){
+  rank.find({}, function(err, results){
+    if (err) console.log(err)
+
+    results.forEach(a=>{
+      if (a.GSRank.length){
+        a.GSRank.forEach(a=>{
+          a.cat = a.cat.replace(/&amp;/g, "&")
+
+         })
+      }
+     a.save(function(err){
+      err ? console.log(err) : console.log("success")
+     })
+    })
+
+
+  })
+
+
+
+}
+
+
+
+
+
+
+
 
 exports.module = {
   makeArray: makeArray,
@@ -332,5 +361,6 @@ exports.module = {
   rank: rank,
   merge: merge,
   deleteEverything: deleteEverything,
-  findAll: findAll
+  findAll: findAll,
+  tempupdate: tempupdate
 }

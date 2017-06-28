@@ -9,10 +9,21 @@ import { Article } from '../article';
 export class ExhibitIndexBuilderComponent implements OnInit {
 
 	@Input() paperList: Array<Article>;
+	client = {
+		name: undefined
+	}
 
   constructor() { }
 
   ngOnInit() {
+  	console.log(this.paperList)
+  	console.log(this.client);
   }
+
+  log(){
+  	console.log(this.client);
+  }
+
+
 
 }

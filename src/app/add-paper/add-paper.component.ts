@@ -16,7 +16,7 @@ export class AddPaperComponent implements OnInit {
 
 
 
-	public model: Article = new Article("", "", 0, 0, false);
+	public model: Article = new Article("", "", 0, 0, false, false, "");
 
   constructor() { }
 
@@ -31,15 +31,19 @@ export class AddPaperComponent implements OnInit {
 // also edits existing papers based on value of this.mode
   submit(){
     if (this.mode){
-      let paper = new Article(this.model.title, this.model.journal, this.model.citations, this.model.year, false);
+      let paper = new Article(this.model.title, this.model.journal, this.model.citations, this.model.year, false, this.model.firstAuthor);
       this.paperList.unshift(paper);
-      this.model = new Article("", "", 0, 0, false);
+      this.model = new Article("", "", 0, 0, false, false);
     } else {
- 	    this.paper = new Article(this.model.title, this.model.journal, this.model.citations, this.model.year, false);
+ 	    this.paper = new Article(this.model.title, this.model.journal, this.model.citations, this.model.year, false, this.model.firstAuthor);
       this.edited.emit(false);
     }
 
   }
+
+  updateRadio(){
+     this.model.firstAuthor ? this.model.firstAuthor = false : this.model.firstAuthor = true
+       }
 
 
 

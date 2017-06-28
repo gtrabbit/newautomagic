@@ -29,6 +29,7 @@ import { AccountsComponent } from './admin/accounts/accounts.component';
 import { MergeifsComponent } from './admin/mergeifs/mergeifs.component';
 import { PaperExhibitComponent } from './exhibit-index-builder/paper-exhibit/paper-exhibit.component';
 import { DbWipeComponent } from './db-wipe/db-wipe.component';
+import { IntCitationsComponent } from './int-citations/int-citations.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { DbWipeComponent } from './db-wipe/db-wipe.component';
     AccountsComponent,
     MergeifsComponent,
     PaperExhibitComponent,
-    DbWipeComponent
+    DbWipeComponent,
+    IntCitationsComponent
   ],
   imports: [
     BrowserModule,

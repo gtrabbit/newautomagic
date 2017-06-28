@@ -16,9 +16,10 @@ export class ProfileSearchComponent implements OnInit {
   public paperList: Article[];
   public journalList: string[];
   public data: Object;
+  websiteBody: string;
   errormsg: string = "";
 
-  proxyList = ["http://scholar.hipr.com/", "http://s2.hipr.com/", "https://scholar.google.com"]
+  proxyList = ["http://scholar.hipr.com/", "http://s2.hipr.com/", "https://scholar.google.com/"]
 
 
 
@@ -41,10 +42,11 @@ export class ProfileSearchComponent implements OnInit {
 
 
   scan(website: string, proxy){
-
+//checks to make sure it's valid
    if (website.search(/citations\?.*user=/gi) !== -1){
+     //replaces with proxy?
     website = website.replace(/.*(?=citations\?user=)/, proxy);
-
+console.log(website);
     this.errormsg = "";
     this.scanService.getPaperList(website)
             .subscribe(
@@ -54,8 +56,9 @@ export class ProfileSearchComponent implements OnInit {
                   this.errormsg = response.err;
                   console.log(response.err)
                 } else {
-                  this.data = body.json();
+                  this.data = body.json().paperList;
                   this.toggleShow(true);
+                  console.log(this.data);
                 }
               },
               error => console.log(error),

@@ -14,7 +14,7 @@ export class ScanService {
 
 
   getPaperList(website: string): Observable<Response> {
-  	website = website.replace(/https/, "http") + "&pagesize=100";
+  	website = website + "&pagesize=100";
    	return this.http.post('./getpaperlist', website);
   	
   					

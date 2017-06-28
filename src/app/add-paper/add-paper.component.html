@@ -4,6 +4,16 @@
 	<label>Journal<input type="text" name="journal" required [(ngModel)]="model.journal" > </label>
 	<label>Year of Publication<input type="text" name="year" required [(ngModel)]="model.year" ></label>
 	<label>Citations?<input type="text" name="citations" [(ngModel)]="model.citations" ></label>
+	<div class="authorship">
+		<label>
+			First Author? <input class="inline" type="radio" name="author" value="first" (change)="updateRadio()" >
+		</label>
+		<label>
+			Co-author? <input class="inline" type="radio" name="author" value="co" checked (change)="updateRadio()" >
+		</label>
+
+	</div>
+	
 	<button type="button" (click)="submit()">Submit</button>
 
 </form>

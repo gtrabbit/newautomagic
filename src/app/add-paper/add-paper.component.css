@@ -2,3 +2,12 @@ input{
 	display: block;
 	width: 98%;
 }
+
+.authorship{
+	display: flex;
+	justify-content: space-around;
+}
+
+.authorship label{
+	
+}

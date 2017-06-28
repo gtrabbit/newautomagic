@@ -57,7 +57,7 @@ export class FirstPanelComponent implements OnInit {
 
   ngOnInit() {
   		for (let item of this.data){
-        let paper = new Article(item.title, item.journal, item.citations, item.year, item.exclude);
+        let paper = new Article(item.title, item.journal, item.citations, item.year, item.exclude, item.firstAuthor, item.link);
         this.paperList.push(paper);
       }
       this.removed = [];

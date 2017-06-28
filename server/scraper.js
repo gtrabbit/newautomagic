@@ -33,7 +33,7 @@ const scrapeRanks = function(body, link){
   } else {
 
 //use regexps to gather info  
-  let CatName = catNameReg.exec(body)[1];
+  let CatName = catNameReg.exec(body)[1].replace(/&amp;/g, "&");
   let table = body.match(tableReg);
   let titles = table[0].match(titleNamesReg)
   
@@ -220,8 +220,36 @@ const scrape = function (website, cb){
             })
           })
 }
+
+
+
+
+  const citingPapers = function(website, cb){
+    console.log(website)
+    tinyreq({
+      url: website,
+      data_encoding: "UTF-8",
+      'user-agent': "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+    }, (err, body) =>{
+      if (err) console.log(err);
+
+      let something = body.match(/<h3 class="gs_rt">(.*?)<\/h3>/g)
+      cb({data: something});
+
+
+
+    })
+
+  }
   
   
 
 
-exports.scrape = scrape;
+
+
+
+exports.module ={
+  scrape: scrape,
+  citingPapers: citingPapers
+}
+

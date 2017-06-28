@@ -15,6 +15,7 @@ export class PaperComponent implements OnInit {
   public editing: boolean = false;
   capsToggle = false;
   formerTitle: string;
+  toggleCitPanel = false;
 	
 	public toggleMsg = function (){
   		if (!this.paper.exclude){
@@ -60,5 +61,17 @@ export class PaperComponent implements OnInit {
   	this.editing = val;
   }
 
+  authorship(ness){
+    this.paper.firstAuthor = ness
+    console.log(this.paper)
+  }
+
+  isFirstAuthored(){
+    return this.paper.firstAuthor
+  }
+
+  showCitations(){
+    this.toggleCitPanel = !this.toggleCitPanel;
+  }
 
 }

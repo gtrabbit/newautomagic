@@ -35,7 +35,7 @@
   
   <button type="submit" (click)="onSubmit()" >
           Save Journal
-        </button> <label>Overwrite Existing Data? <input type="checkbox" class="noRankCheck" id="overwrite" [checked]="overwrite" (change)="overwrite = !overwrite"> </label>
+        </button> <label>Overwrite Existing Data? <input type="checkbox" class="noRankCheck" id="overwrite" [checked]="overwrite" checked (change)="overwrite = !overwrite"> </label>
 
         <p *ngIf="showResponse"> {{response}} </p>
 
