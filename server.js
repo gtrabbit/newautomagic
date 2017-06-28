@@ -301,8 +301,8 @@ app.get('/getcitingpapers/:url', function(req, res){
     res.send(data)
   }
   website = "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=".concat(req.params.url)
-  scraper.module.citingPapers(website)
-
+  scraper.module.citingPapers(website, cb)
+ 
 })
 
 
