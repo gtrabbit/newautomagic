@@ -42,7 +42,7 @@ const scrapeRanks = function(body, link){
               top10: []};
 
 //reduce to top 10 only
-  let topTenTitles = titles.slice(1, 11);
+  let topTenTitles = titles.slice(0, 10);
 
 //enter titles into data structure 
   topTenTitles.forEach(function(a){
@@ -61,7 +61,7 @@ const scrapeRanks = function(body, link){
 
 
 const findLinks = function (body){
-  console.log("attempting to find new links")
+
   //finds location of navigation
   const findNavReg = /<div class="gs_md_ul">(.*?)<\/div>/;
   //picks out links to categories
@@ -90,7 +90,7 @@ const checkDups = function (a, cat){
 
 
 const submitRanks = function (ranks, link){
-   
+
     ranks.top10.forEach(function(a, i){
       let search = cleaner.clean(a);
       let position = i+1;
@@ -101,7 +101,7 @@ const submitRanks = function (ranks, link){
         };
         
         if (!journal.length){
-          
+          console.log("found a new journal")
           let newJournal = new rank({
             journalName: a,
             search: search,
@@ -120,9 +120,8 @@ const submitRanks = function (ranks, link){
           if (err) {
             console.log(err)
             let msg = "An error occured. Please run the scrape again. Sometimes multiple attempts are necessary.";
-            console.log(msg);
           } else {
-            console.log("found a new journal and saved it")
+            console.log("saved journal ", newJournal);
           }
          
     
@@ -131,8 +130,9 @@ const submitRanks = function (ranks, link){
           
           
         } else {
+          //having found a new journal
           if (!checkDups(journal[0].GSRank, category)){
-            
+    
             journal[0].GSRank.push({
             rank: position,
             cat: category,
@@ -147,7 +147,30 @@ const submitRanks = function (ranks, link){
           })
             
           } else {
-           // console.log("journal already ranked in this category")
+            journal[0].GSRank.forEach(function(a, i){
+              if (a.cat === category && a.rank !== position){
+                console.log("modifying " + a.cat + " from " + a.rank + " to " + position)
+                journal[0].GSRank[i] = {
+                   rank: position,
+                  cat: category,
+                  catLink: {
+                    DL: false,
+                    link: link
+                  }
+                }
+              journal[0].save(function(err){
+              
+                if (err) {
+                  console.log(err)
+                  console.log(journal[0])
+                }
+              
+          })
+         
+              }
+            })
+
+           
      
           }
         }
@@ -179,8 +202,7 @@ const scrape = function (website, cb){
             let links = findLinks(body)
             linksLooked += links.length;
             links.forEach(function(a, i, array){
-              console.log(a);
-              console.log("looking at new link");
+   
 
               (function(i){
                 setTimeout(function(){
@@ -211,11 +233,11 @@ const scrape = function (website, cb){
                               cb({msg: "GS Ranks successfully updated"});
                             }
                           } )
-                        }, i*2000)
+                        }, i*1200)
                       }(i))
                     })
                   })
-                }, i*1600)
+                }, i*1000)
               }(i));
             })
           })
