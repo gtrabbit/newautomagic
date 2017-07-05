@@ -63,7 +63,7 @@ const scrapeRanks = function(body, link){
 const findLinks = function (body){
 
   //finds location of navigation
-  const findNavReg = /<div class="gs_md_ul">(.*?)<\/div>/;
+  const findNavReg = /<div class="gs_md_ul">.*?id="gsc_mp_nav_right"/g;
   //picks out links to categories
   const linkReg = /<a href="(.*?)"/g;
 
@@ -90,7 +90,7 @@ const checkDups = function (a, cat){
 
 
 const submitRanks = function (ranks, link){
-
+    console.log(ranks.cat);
     ranks.top10.forEach(function(a, i){
       let search = cleaner.clean(a);
       let position = i+1;
