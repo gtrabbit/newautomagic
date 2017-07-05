@@ -9,7 +9,7 @@ export class NaviComponent implements OnInit{
 
 	@Input() state: number;
 	@Output() stateChange = new EventEmitter();
-	locations = ["Confirm Papers", "Confirm Journals", "Retrieve Rankings", "Find Top Cited", "Build Exhibit Index"]
+	locations = ["Confirm Papers", "Confirm Journals", "Retrieve Rankings", "Find Top Cited"]
 
   constructor() { }
 
