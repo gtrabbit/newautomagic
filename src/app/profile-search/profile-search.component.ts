@@ -46,7 +46,7 @@ export class ProfileSearchComponent implements OnInit {
    if (website.search(/citations\?.*user=/gi) !== -1){
      //replaces with proxy?
     website = website.replace(/.*(?=citations\?user=)/, proxy);
-console.log(website);
+
     this.errormsg = "";
     this.scanService.getPaperList(website)
             .subscribe(
@@ -80,7 +80,17 @@ console.log(website);
   }
 
   scratch(){
-    this.data = {};
+    this.data = [
+      {
+        title: "Title of Article",
+        journal: "Journal Name",
+        citations: 234,
+        year: 2006,
+        exclude: false,
+        firstAuthor: false,
+        link: "www.link.com"
+      }
+    ];
     this.toggleShow(true)
   }
 

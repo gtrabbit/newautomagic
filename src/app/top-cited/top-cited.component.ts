@@ -20,7 +20,7 @@ export class TopCitedComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
-  	
+  
   
   }
 
@@ -33,12 +33,12 @@ export class TopCitedComponent implements OnInit, OnChanges {
   }
 
   getMostCited(){
-
+    console.log(this.field)
     const readOut=[];
    
     this.paperList.forEach((a) => {
     
-    let targets = this.pbf[this.field.toLowerCase()].percentiles[a.year];
+    let targets = this.pbf["Chemistry"].percentiles[a.year];
     let perc;
     for (let item in targets){
       if (Number(a.citations) >= Number(item)){
@@ -49,7 +49,7 @@ export class TopCitedComponent implements OnInit, OnChanges {
       if (a.citations == 1){
         this.payLoad[3] = this.payLoad[3].replace(/citations/, "citation");
       }
-      let k = this.name + this.payLoad[0] + a.title + this.payLoad[1] + a.year + this.payLoad[8] + "<em>" + a.journal + "</em>" + this.payLoad[2] + a.citations  + this.payLoad[3] + this.field + this.payLoad[4] + a.year  + this.payLoad[5] + this.pbf[this.field.toLowerCase()].averages[a.year] + this.payLoad[6] +  perc +  this.payLoad[7] + this.field + this.payLoad[8] + a.year + "</strong>.";
+      let k = this.name + this.payLoad[0] + a.title + this.payLoad[1] + a.year + this.payLoad[8] + "<em>" + a.journal + "</em>" + this.payLoad[2] + a.citations  + this.payLoad[3] + this.field + this.payLoad[4] + a.year  + this.payLoad[5] + this.pbf[this.field].averages[a.year] + this.payLoad[6] +  perc +  this.payLoad[7] + this.field + this.payLoad[8] + a.year + "</strong>.";
       readOut.push(k);
       }
 

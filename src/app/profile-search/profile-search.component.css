@@ -15,3 +15,8 @@
 input{
 	width: 60%;
 }
+
+.legacy {
+	border: solid pink 2px;
+	padding: 1%;
+}
